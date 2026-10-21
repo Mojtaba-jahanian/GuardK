@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering
+\caption{End-to-end stability-regularized UOT on the five real datasets. Values are mean $\pm$ standard deviation over five seeds. Counts were inherited from the label-free V4.1 consensus.}
+\label{tab:v42-appendix}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+Dataset & NMI & ARI & ACC & Macro-F1 & Rare recall & $\widehat K/K$ \\
+\midrule
+TCGA-PANCAN RNA-Seq & 0.924 $\pm$ 0.025 & 0.901 $\pm$ 0.062 & 0.964 & 0.969 & 0.956 & 5/5 \\
+Mice Protein & 0.422 $\pm$ 0.014 & 0.230 $\pm$ 0.012 & 0.343 & 0.214 & 0.000 & 4/8 \\
+WDBC & 0.570 $\pm$ 0.147 & 0.667 $\pm$ 0.137 & 0.907 & 0.899 & 0.829 & 2/2 \\
+Dermatology & 0.834 $\pm$ 0.014 & 0.766 $\pm$ 0.018 & 0.825 & 0.747 & 0.870 & 5/6 \\
+Parkinsons & 0.103 $\pm$ 0.018 & 0.054 $\pm$ 0.026 & 0.800 & 0.692 & 0.429 & 6/2 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

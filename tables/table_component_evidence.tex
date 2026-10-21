@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\caption{Mechanistic evidence from the later real-data ablations. Positive values indicate an improvement of the first configuration over the comparator. The evidence does not support a specific advantage for unbalanced transport or the implemented rare-mass weighting.}
+\label{tab:component-evidence}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth}p{0.16\textwidth}rrX@{}}
+\toprule
+Comparison & Cohort/scope & $\Delta$NMI & $\Delta$ARI & Interpretation \\
+\midrule
+End-to-end stability loss vs.\ no stability loss & 25 matched real-data runs & $-0.0001$ & $+0.0001$ & No agreement gain; temporal stability increased \\
+Cross-cohort UOT vs.\ no transport & TCGA-BRCA & $+0.0156$ & $+0.0188$ & Small, directionally positive; $p=0.0625$ \\
+Cross-cohort UOT vs.\ no transport & METABRIC & $+0.0079$ & $+0.0038$ & Small, directionally positive; $p=0.0625$ \\
+Unbalanced OT vs.\ balanced OT & Both cohorts & $\approx 0$ & $\approx 0$ & Indistinguishable within numerical variation \\
+Rare-mass weighting vs.\ no rare weighting & Both cohorts & \shortstack{Non-positive\\overall} & \shortstack{Non-positive\\overall} & Rare recall was not improved consistently \\
+Teacher--student refinement vs.\ V5.1 & TCGA-BRCA & $-0.0405$ & $-0.0118$ & Refinement degraded the stronger development result \\
+Teacher--student refinement vs.\ V5.1 & METABRIC & $-0.0170$ & $-0.0190$ & Refinement degraded the stronger development result \\
+\bottomrule
+\end{tabularx}
+\end{table*}

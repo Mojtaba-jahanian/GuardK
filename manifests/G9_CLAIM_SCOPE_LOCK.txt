@@ -1,0 +1,15 @@
+PROJECT=GuardK_V6
+METHOD=GuardK_v0.4
+PRIMARY_CLAIM=Selective unknown-cardinality clustering: accept K only when its label-free selection is reproducible under perturbation; otherwise abstain.
+SECONDARY_CLAIM=Under imbalance and overlap, selective acceptance can improve reliability of accepted partitions relative to forced selection, at the cost of coverage.
+NOT_CLAIMED=Universal exact-K superiority over all clustering methods.
+NOT_CLAIMED=Clinical subtype discovery.
+NOT_CLAIMED=Clinical validation.
+NOT_CLAIMED=UOT or balanced OT superiority.
+OT_CORE=FALSE
+UOT_CORE=FALSE
+V03_PRIMARY=FALSE
+V04_HYPERPARAMETERS_FROZEN=TRUE
+POST_HOC_THRESHOLD_TUNING_AFTER_G6X=PROHIBITED
+G7_INTERPRETATION=Standard real data demonstrates both success and abstention/failure; broad universal-K claims are unsupported.
+G8_INTERPRETATION=Biomedical data are stress/failure analyses only; no clinical claim.

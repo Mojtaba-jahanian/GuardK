@@ -1,0 +1,13 @@
+PROJECT=GuardK_V6
+TITLE=GuardK: Stability-Guided Prototype Clustering with Unknown Cardinality under Imbalance and Overlap
+SCIENTIFIC_STATUS=MAJOR_REDESIGN_FROM_AUTOUOT_DC
+CORE_METHOD=adaptive prototype lifecycle + label-free stability guard + imbalance-aware prototype protection + overlap-aware accept/reject or abstention
+OPTIONAL_OPERATORS=balanced optimal transport; unbalanced optimal transport
+UOT_IS_CORE=FALSE
+PRIMARY_EXPERIMENT_FACTORS=imbalance; overlap; separation; noise; sample_size; true_K
+PRIMARY_METRICS=exact_K_recovery; absolute_K_error; ARI; NMI; rare_cluster_recall; worst_cluster_recall; stability; runtime; peak_memory
+GROUND_TRUTH_POLICY=Ground-truth labels may be used only for external evaluation and never for model/K selection.
+TEST_POLICY=No post-hoc threshold tuning on confirmatory test scenarios.
+PREDECESSOR_POLICY=AutoUOT-DC results are predecessor evidence only and may not be relabeled as GuardK results.
+COMPARATOR_POLICY=Matched ablations use identical preprocessing, seed policy, candidate-K range and evaluation protocol.
+CONFIRMATORY_POLICY=Hyperparameters and guard thresholds must be locked before confirmatory runs.

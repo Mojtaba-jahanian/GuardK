@@ -1,0 +1,8 @@
+# Compatible runtime dependencies, not an exact historical lock.
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+scikit-learn>=1.3
+hdbscan>=0.8.33
+matplotlib>=3.7
+# Historical environment snapshot: environment/pip_freeze_G2.txt

@@ -1,0 +1,22 @@
+\begin{table*}[t]
+\centering
+\caption{Label-free consensus results for the non-PAM50 gene and pathway representations. These experiments used both cohorts for development and should not be interpreted as external validation.}
+\label{tab:v50-appendix}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llccccc}
+\toprule
+View & Cohort & $\widehat K$ & NMI & ARI & Rare recall & Partition stability \\
+\midrule
+Gene PCA & TCGA-BRCA & 5 & 0.310 & 0.243 & 0.194 & 0.230 \\
+Gene PCA & METABRIC & 5 & 0.085 & 0.067 & 0.100 & 0.126 \\
+Hallmark & TCGA-BRCA & 2 & 0.034 & 0.056 & 0.000 & 0.822 \\
+Hallmark & METABRIC & 2 & 0.091 & 0.086 & 0.000 & 0.276 \\
+PROGENy & TCGA-BRCA & 3 & 0.208 & 0.257 & 0.000 & 0.580 \\
+PROGENy & METABRIC & 3 & 0.196 & 0.231 & 0.000 & 0.661 \\
+Pathway fused & TCGA-BRCA & 3 & 0.202 & 0.221 & 0.000 & 0.386 \\
+Pathway fused & METABRIC & 3 & 0.235 & 0.222 & 0.000 & 0.490 \\
+Gene--pathway fused & TCGA-BRCA & 3 & 0.256 & 0.287 & 0.000 & 0.566 \\
+Gene--pathway fused & METABRIC & 3 & 0.258 & 0.206 & 0.000 & 0.440 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

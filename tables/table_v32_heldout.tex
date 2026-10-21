@@ -1,0 +1,18 @@
+\begin{table*}[t]
+\centering
+\caption{Performance on five unseen robustness scenarios using five new random seeds per scenario.}
+\label{tab:v32-heldout}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+Method & NMI & ARI & Rare recall & $|\widehat K-K|$ & Exact $K$ (\%) \\
+\midrule
+AutoUOT-DC V3.2 & \textbf{0.929 $\pm$ 0.068} & \textbf{0.953 $\pm$ 0.061} & \textbf{0.868 $\pm$ 0.328} & \textbf{0.520 $\pm$ 0.770} & \textbf{64.0} \\
+AutoUOT-DC V3.1 & 0.860 $\pm$ 0.105 & 0.902 $\pm$ 0.093 & -- & 0.760 $\pm$ 1.012 & 56.0 \\
+K-means silhouette & 0.747 $\pm$ 0.167 & 0.807 $\pm$ 0.175 & 0.040 $\pm$ 0.200 & 2.120 $\pm$ 1.536 & 4.0 \\
+PCA + GMM-BIC & 0.871 $\pm$ 0.092 & 0.906 $\pm$ 0.125 & 0.040 $\pm$ 0.200 & 1.160 $\pm$ 1.214 & 36.0 \\
+K-means (oracle $K$) & 0.702 $\pm$ 0.111 & 0.573 $\pm$ 0.168 & 0.281 $\pm$ 0.393 & 0.000 $\pm$ 0.000 & 100.0 \\
+\bottomrule
+\end{tabular}}
+\begin{flushleft}\footnotesize Oracle-$K$ K-means uses the true number of subtypes and is shown only as a contextual reference.\end{flushleft}
+\end{table*}

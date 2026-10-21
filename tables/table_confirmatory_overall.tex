@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{Untouched 288-case confirmatory grid. Accepted-set metrics for GuardK v0.4 are conditional on coverage; exact-$K$ over all cases counts abstentions as non-recovery.}
+\label{tab:confirmatory-overall}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+Method & Coverage & Exact-$K$ all & Exact-$K$ accepted & $|K-K^\star|$ accepted & ARI accepted & Worst recall accepted\\
+\midrule
+GuardK v0.4 & 0.559 & 0.229 & 0.410 & 1.665 & 0.747 & 0.406\\
+GuardK v0.2 & 1.000 & 0.247 & 0.247 & 2.476 & 0.611 & 0.238\\
+K-means + silhouette & 1.000 & 0.441 & 0.441 & 1.774 & 0.691 & 0.448\\
+GMM + BIC & 1.000 & 0.274 & 0.274 & 1.503 & 0.678 & 0.482\\
+Agglomerative + silhouette & 1.000 & 0.438 & 0.438 & 1.788 & 0.676 & 0.483\\
+HDBSCAN & 1.000 & 0.208 & 0.208 & 3.545 & 0.328 & 0.260\\
+\bottomrule
+\end{tabular}}
+\end{table}

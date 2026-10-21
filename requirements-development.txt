@@ -1,0 +1,4 @@
+-r requirements-experiments.txt
+# Only needed for historical transport ablations, not final GuardK v0.4.
+POT>=0.9
+PyYAML>=6

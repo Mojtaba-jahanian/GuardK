@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\caption{Locked, non-circular disease-specific evaluation. All PAM50 genes were excluded before unsupervised feature selection; the TCGA-derived feature panel and analysis settings were transferred unchanged to METABRIC. Brackets denote 95\% bootstrap confidence intervals.}
+\label{tab:locked-brca-metabric}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccccc}
+\toprule
+Cohort & NMI & ARI & ACC & Macro-F1 & Rare recall & $\widehat K/K$ & OS log-rank $p$ \\
+\midrule
+TCGA-BRCA &
+0.326 [0.299, 0.361] &
+0.243 [0.210, 0.280] &
+0.558 & 0.448 & 0.000 & 4/5 & 0.0077 \\
+METABRIC &
+0.157 [0.136, 0.185] &
+0.073 [0.057, 0.089] &
+0.464 & 0.296 & 0.000 & 4/5 & 0.614 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

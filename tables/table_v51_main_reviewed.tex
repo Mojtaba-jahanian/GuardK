@@ -1,0 +1,14 @@
+\begin{table*}[t]
+\centering
+\caption{Cross-cohort anti-underclustering development results over five seeds. TCGA-BRCA and METABRIC were both development cohorts at this stage because the earlier locked evaluation had already been inspected. PAM50 labels were used only for post-hoc scoring.}
+\label{tab:v51-reviewed}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccccc}
+\toprule
+Cohort & $\widehat K/K$ & NMI & ARI & ACC & Macro-F1 & Rare recall & Seed stability \\
+\midrule
+TCGA-BRCA & 5/5 & 0.308 $\pm$ 0.002 & 0.227 $\pm$ 0.002 & 0.531 & 0.469 & 0.194 & 0.926 \\
+METABRIC & 5/5 & 0.295 $\pm$ 0.003 & 0.253 $\pm$ 0.004 & 0.551 & 0.514 & 0.159 & 0.943 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

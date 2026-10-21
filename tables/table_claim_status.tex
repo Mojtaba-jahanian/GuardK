@@ -1,0 +1,41 @@
+\begin{table*}[t]
+\centering
+\caption{Evidence-based status of the principal claims after review of all completed experiments.}
+\label{tab:claim-status}
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.25\textwidth}X>{\raggedright\arraybackslash}p{0.17\textwidth}}
+\toprule
+Claim & Evidence & Status \\
+\midrule
+Unknown-$K$ recovery under controlled imbalance, overlap, and outliers &
+94.3\% exact-$K$ recovery in development and 64.0\% on held-out stress tests, with large gains over earlier configurations and non-oracle comparators. &
+Supported in controlled data \\
+\addlinespace
+Protection of coherent rare groups &
+Rare recall was 0.811 in controlled development and 0.868 in held-out stress tests, including perfect recovery in the 1:50 scenario; performance deteriorated in the combined-hard setting. &
+Conditionally supported \\
+\addlinespace
+Transfer to heterogeneous real medical data &
+Stability consensus improved macro NMI from 0.358 to 0.578 and performed strongly on TCGA-PANCAN, WDBC, and Dermatology, but failed on Parkinsons and under-clustered Mice Protein. &
+Dataset-dependent \\
+\addlinespace
+Reliable within-disease PAM50 subtype discovery &
+The locked TCGA-BRCA and METABRIC experiment selected four rather than five clusters, did not recover the Normal-like group, and did not replicate the TCGA survival association. &
+Not supported \\
+\addlinespace
+Stable cross-cohort recovery of five-class granularity &
+The anti-underclustering selector chose $K=5$ in all five development seeds for both cohorts, with stability above 0.92, but PAM50 agreement remained moderate. &
+Supported as development evidence \\
+\addlinespace
+Specific benefit of unbalanced rather than balanced transport &
+Balanced and unbalanced transport were effectively indistinguishable in cross-cohort and teacher--student ablations; guarded UOT was rejected in most broad datasets and both locked cohorts. &
+Not supported \\
+\addlinespace
+Benefit of rare-mass weighting and teacher--student refinement &
+Removing rare weighting did not consistently reduce rare recall, and teacher--student refinement reduced NMI, ARI, macro-F1, and rare recall relative to the stronger cross-cohort configuration. &
+Not supported \\
+\bottomrule
+\end{tabularx}
+\end{table*}

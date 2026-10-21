@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\caption{Overall robustness benchmark across seven development scenarios and five independent seeds.}
+\label{tab:v32-main}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+Method & NMI & ARI & Rare recall & $|\widehat K-K|$ & Exact $K$ (\%) \\
+\midrule
+AutoUOT-DC V3.2 & \textbf{0.890 $\pm$ 0.147} & \textbf{0.937 $\pm$ 0.103} & \textbf{0.811 $\pm$ 0.331} & \textbf{0.057 $\pm$ 0.236} & \textbf{94.3} \\
+AutoUOT-DC V3.1 & 0.788 $\pm$ 0.257 & 0.825 $\pm$ 0.239 & 0.704 $\pm$ 0.436 & 0.600 $\pm$ 0.736 & 54.3 \\
+AutoUOT-DC V3 & 0.583 $\pm$ 0.227 & 0.472 $\pm$ 0.250 & 0.625 $\pm$ 0.404 & 4.143 $\pm$ 1.912 & 2.9 \\
+Balanced OT & 0.479 $\pm$ 0.171 & 0.305 $\pm$ 0.171 & 0.576 $\pm$ 0.351 & 4.971 $\pm$ 2.673 & 0.0 \\
+K-means silhouette & 0.711 $\pm$ 0.317 & 0.726 $\pm$ 0.325 & 0.230 $\pm$ 0.425 & 1.314 $\pm$ 1.183 & 28.6 \\
+SP-AE + GMM-BIC & 0.867 $\pm$ 0.148 & 0.929 $\pm$ 0.089 & 0.257 $\pm$ 0.443 & 0.943 $\pm$ 0.684 & 25.7 \\
+K-means (oracle K) & 0.695 $\pm$ 0.294 & 0.625 $\pm$ 0.325 & 0.461 $\pm$ 0.469 & 0.000 $\pm$ 0.000 & 100.0 \\
+\bottomrule
+\end{tabular}}
+\begin{flushleft}\footnotesize SP-AE + GMM-BIC denotes full-covariance GMM selected by BIC on the same structure-preserving latent representation. Oracle-$K$ results are contextual upper-bound baselines and are not directly comparable for unknown-$K$ discovery.\end{flushleft}
+\end{table*}

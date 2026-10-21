@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering
+\caption{Label-free stability-consensus selection used by V4.1.}
+\label{tab:v41-selection}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+Dataset & Candidate $K$ values & Consensus $K$ & Family & View & Partition stability \\
+\midrule
+TCGA-PANCAN-RNASeq & 5, 4, 5 & 5 & ward & raw\_pca & 1.000 \\
+Mice-Protein & 3, 5, 4 & 4 & kmeans & raw\_pca & 0.232 \\
+WDBC & 2, 2, 2 & 2 & kmeans & raw\_pca & 0.853 \\
+Dermatology & 5, 5, 5 & 5 & ward & raw\_pca & 1.000 \\
+Parkinsons & 6, 5, 7 & 6 & kmeans & raw\_pca & 0.291 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

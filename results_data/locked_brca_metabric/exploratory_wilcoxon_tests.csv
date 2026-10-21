@@ -1,0 +1,17 @@
+cohort,comparator,metric,AutoUOT_mean,comparator_mean,mean_difference,wilcoxon_statistic,p_value,n,note
+TCGA-BRCA,kmeans_silhouette,nmi,0.2858419866328412,0.4562486677669086,-0.17040668113406737,1.0,0.125,5,Exploratory; five paired seeds; no multiplicity correction
+TCGA-BRCA,kmeans_silhouette,ari,0.2388354811333535,0.3130312575576996,-0.07419577642434605,4.0,0.4375,5,Exploratory; five paired seeds; no multiplicity correction
+TCGA-BRCA,ward_silhouette,nmi,0.2858419866328412,0.24957222551360386,0.03626976111923731,5.0,0.625,5,Exploratory; five paired seeds; no multiplicity correction
+TCGA-BRCA,ward_silhouette,ari,0.2388354811333535,0.2070892779098088,0.03174620322354477,4.0,0.4375,5,Exploratory; five paired seeds; no multiplicity correction
+TCGA-BRCA,gmm_bic,nmi,0.2858419866328412,0.20036954720328232,0.08547243942955889,4.0,0.4375,5,Exploratory; five paired seeds; no multiplicity correction
+TCGA-BRCA,gmm_bic,ari,0.2388354811333535,0.14360605437295834,0.09522942676039522,1.0,0.125,5,Exploratory; five paired seeds; no multiplicity correction
+TCGA-BRCA,kmeans_oracle_k,nmi,0.2858419866328412,0.37128814297074414,-0.08544615633790296,4.0,0.4375,5,Exploratory; five paired seeds; no multiplicity correction
+TCGA-BRCA,kmeans_oracle_k,ari,0.2388354811333535,0.29084170618130833,-0.052006225047954754,4.0,0.4375,5,Exploratory; five paired seeds; no multiplicity correction
+METABRIC,kmeans_silhouette,nmi,0.2035308011753812,0.25791973035619825,-0.05438892918081702,4.0,0.4375,5,Exploratory; five paired seeds; no multiplicity correction
+METABRIC,kmeans_silhouette,ari,0.1374806385528144,0.12031692133164489,0.017163717221169508,6.0,0.8125,5,Exploratory; five paired seeds; no multiplicity correction
+METABRIC,ward_silhouette,nmi,0.2035308011753812,0.1634081010777226,0.04012270009765858,6.0,0.75,5,Exploratory; five paired seeds; no multiplicity correction
+METABRIC,ward_silhouette,ari,0.1374806385528144,0.072924310840984,0.0645563277118304,6.0,0.75,5,Exploratory; five paired seeds; no multiplicity correction
+METABRIC,gmm_bic,nmi,0.2035308011753812,0.11168530249224182,0.09184549868313936,0.0,0.0625,5,Exploratory; five paired seeds; no multiplicity correction
+METABRIC,gmm_bic,ari,0.1374806385528144,0.1016946147071647,0.03578602384564969,6.0,0.8125,5,Exploratory; five paired seeds; no multiplicity correction
+METABRIC,kmeans_oracle_k,nmi,0.2035308011753812,0.3351707182880399,-0.1316399171126587,1.0,0.125,5,Exploratory; five paired seeds; no multiplicity correction
+METABRIC,kmeans_oracle_k,ari,0.1374806385528144,0.24247899502286593,-0.10499835647005154,2.0,0.1875,5,Exploratory; five paired seeds; no multiplicity correction

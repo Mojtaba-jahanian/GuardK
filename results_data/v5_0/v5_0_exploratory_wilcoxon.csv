@@ -1,0 +1,25 @@
+cohort,comparison_view,reference_view,metric,comparison_mean,reference_mean,mean_difference,wilcoxon_statistic,p_value,note
+TCGA-BRCA,hallmark,gene_shared_pca,nmi,0.20646802203400255,0.2257150153212078,-0.01924699328720527,4.0,0.4375,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+TCGA-BRCA,hallmark,gene_shared_pca,ari,0.15155203016180355,0.17828726791128027,-0.02673523774947676,3.0,0.3125,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+TCGA-BRCA,hallmark,gene_shared_pca,rare_recall,0.4722222222222222,0.29999999999999993,0.17222222222222222,4.0,0.375,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+TCGA-BRCA,progeny,gene_shared_pca,nmi,0.22693851051383898,0.2257150153212078,0.0012234951926311521,7.0,1.0,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+TCGA-BRCA,progeny,gene_shared_pca,ari,0.19470042895870718,0.17828726791128027,0.016413161047426898,7.0,1.0,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+TCGA-BRCA,progeny,gene_shared_pca,rare_recall,0.45,0.29999999999999993,0.15,0.0,0.125,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+TCGA-BRCA,pathway_fused,gene_shared_pca,nmi,0.2499772263893064,0.2257150153212078,0.02426221106809854,6.0,0.8125,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+TCGA-BRCA,pathway_fused,gene_shared_pca,ari,0.20265218004841162,0.17828726791128027,0.02436491213713136,3.0,0.3125,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+TCGA-BRCA,pathway_fused,gene_shared_pca,rare_recall,0.2611111111111111,0.29999999999999993,-0.0388888888888889,4.0,0.875,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+TCGA-BRCA,gene_pathway_fused,gene_shared_pca,nmi,0.25947877419699217,0.2257150153212078,0.03376375887578437,4.0,0.4375,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+TCGA-BRCA,gene_pathway_fused,gene_shared_pca,ari,0.21541613683854005,0.17828726791128027,0.0371288689272598,3.0,0.3125,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+TCGA-BRCA,gene_pathway_fused,gene_shared_pca,rare_recall,0.33888888888888885,0.29999999999999993,0.03888888888888888,4.5,1.0,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+METABRIC,hallmark,gene_shared_pca,nmi,0.21633754547239784,0.16265801045991304,0.05367953501248481,2.0,0.1875,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+METABRIC,hallmark,gene_shared_pca,ari,0.159494568621385,0.11490185329197974,0.04459271532940527,1.0,0.125,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+METABRIC,hallmark,gene_shared_pca,rare_recall,0.4471428571428572,0.22428571428571428,0.22285714285714286,3.0,0.3125,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+METABRIC,progeny,gene_shared_pca,nmi,0.19573800091932517,0.16265801045991304,0.03307999045941212,4.0,0.4375,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+METABRIC,progeny,gene_shared_pca,ari,0.1732706072820211,0.11490185329197974,0.05836875399004136,1.0,0.125,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+METABRIC,progeny,gene_shared_pca,rare_recall,0.2228571428571428,0.22428571428571428,-0.0014285714285714652,7.0,1.0,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+METABRIC,pathway_fused,gene_shared_pca,nmi,0.22765214967316355,0.16265801045991304,0.0649941392132505,2.0,0.1875,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+METABRIC,pathway_fused,gene_shared_pca,ari,0.19621082308672955,0.11490185329197974,0.08130896979474982,0.0,0.0625,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+METABRIC,pathway_fused,gene_shared_pca,rare_recall,0.2457142857142857,0.22428571428571428,0.0214285714285714,7.0,1.0,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+METABRIC,gene_pathway_fused,gene_shared_pca,nmi,0.26847318504334233,0.16265801045991304,0.10581517458342929,0.0,0.0625,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+METABRIC,gene_pathway_fused,gene_shared_pca,ari,0.19926869039693043,0.11490185329197974,0.0843668371049507,0.0,0.0625,Exploratory; five paired seeds; fixed K=5; no multiplicity correction
+METABRIC,gene_pathway_fused,gene_shared_pca,rare_recall,0.33285714285714285,0.22428571428571428,0.10857142857142857,4.0,0.4375,Exploratory; five paired seeds; fixed K=5; no multiplicity correction

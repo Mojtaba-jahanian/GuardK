@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Dataset-macro comparison on the real-data benchmark.}
+\label{tab:v41-macro-comparison}
+\resizebox{0.98\textwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+Method & NMI & ARI & $E_K$ & Exact $K$ \\
+\midrule
+AutoUOT-DC V4.1 consensus & 0.578 & 0.540 & 1.80 & 40\% \\
+AutoUOT-DC V4.1 independent & 0.541 & 0.510 & 2.12 & 24\% \\
+AutoUOT-DC V4 & 0.358 & 0.293 & 2.28 & 0\% \\
+GMM + BIC & 0.466 & 0.377 & 2.16 & 12\% \\
+K-means + silhouette & 0.336 & 0.233 & 1.96 & 28\% \\
+Agglomerative + silhouette & 0.333 & 0.284 & 2.00 & 40\% \\
+HDBSCAN & 0.247 & 0.080 & 3.00 & 20\% \\
+\bottomrule
+\end{tabular}}
+\end{table}

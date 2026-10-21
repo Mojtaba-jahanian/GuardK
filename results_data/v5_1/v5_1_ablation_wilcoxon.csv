@@ -1,0 +1,25 @@
+cohort,comparison,metric,full_mean,comparison_mean,mean_difference,statistic,p_value,note
+TCGA-BRCA,no_uot,nmi,0.3084958096580501,0.2928607687169109,0.0156350409411391,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,no_uot,ari,0.2266234167901118,0.2078413843620793,0.0187820324280324,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,no_uot,rare_recall,0.1944444444444444,0.2,-0.0055555555555555,0.0,1.0,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,balanced_ot,nmi,0.3084958096580501,0.3082959087068194,0.0001999009512307,5.0,0.625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,balanced_ot,ari,0.2266234167901118,0.2261323051615881,0.0004911116285236,4.0,0.4375,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,balanced_ot,rare_recall,0.1944444444444444,0.1944444444444444,0.0,0.0,1.0,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,no_rare_protection,nmi,0.3084958096580501,0.3127054996261713,-0.0042096899681211,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,no_rare_protection,ari,0.2266234167901118,0.2262549832967128,0.0003684334933989,7.0,1.0,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,no_rare_protection,rare_recall,0.1944444444444444,0.1999999999999999,-0.0055555555555555,0.0,1.0,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,old_undercluster_k3,nmi,0.3084958096580501,0.3200856059061712,-0.0115897962481211,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,old_undercluster_k3,ari,0.2266234167901118,0.334770539429633,-0.1081471226395212,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,old_undercluster_k3,rare_recall,0.1944444444444444,0.0,0.1944444444444444,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,no_uot,nmi,0.2951624724173358,0.2872452625153072,0.0079172099020286,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,no_uot,ari,0.2529948255982653,0.2491779136015996,0.0038169119966657,6.0,0.8125,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,no_uot,rare_recall,0.1585714285714285,0.1342857142857142,0.0242857142857142,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,balanced_ot,nmi,0.2951624724173358,0.2956023099122334,-0.0004398374948975,5.0,0.625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,balanced_ot,ari,0.2529948255982653,0.2533011974004877,-0.0003063718022222,6.0,0.8125,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,balanced_ot,rare_recall,0.1585714285714285,0.1528571428571428,0.0057142857142857,1.5,0.375,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,no_rare_protection,nmi,0.2951624724173358,0.2949934868830617,0.0001689855342741,7.0,1.0,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,no_rare_protection,ari,0.2529948255982653,0.2469773932292949,0.0060174323689704,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,no_rare_protection,rare_recall,0.1585714285714285,0.1771428571428571,-0.0185714285714285,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,old_undercluster_k3,nmi,0.2951624724173358,0.2853377145417392,0.0098247578755966,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,old_undercluster_k3,ari,0.2529948255982653,0.2694559525572839,-0.0164611269590185,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,old_undercluster_k3,rare_recall,0.1585714285714285,0.0,0.1585714285714285,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction

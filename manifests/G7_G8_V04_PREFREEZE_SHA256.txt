@@ -1,0 +1,3 @@
+176180252f69f6273a5adf2c34af8ca74c4c4c94b759fb73dd380d17f4ac0a91  src/guardk/core.py
+8ca2c59785674daefb0858e16a6c986ba0609739f52d5d5952e14ddf2b80d15d  src/guardk/core_v04.py
+28429c3eab52d294cab994a08de4f11e1dd2b002cd69cc0b89342325069bf59a  manifests/G6W_V04_PROTOCOL_LOCK.txt

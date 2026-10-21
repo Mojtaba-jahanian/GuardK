@@ -1,0 +1,18 @@
+\begin{table*}[t]
+\centering
+\caption{Ablation study of the V3.2 overlap-aware multi-scale consolidation components.}
+\label{tab:v32-ablation}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+Variant & NMI & ARI & $|\widehat K-K|$ & Exact $K$ (\%) \\
+\midrule
+Full V3.2 & \textbf{0.890 $\pm$ 0.153} & \textbf{0.932 $\pm$ 0.118} & \textbf{0.048 $\pm$ 0.218} & \textbf{95.2} \\
+No adaptive scale & 0.889 $\pm$ 0.152 & 0.932 $\pm$ 0.118 & 0.095 $\pm$ 0.301 & 90.5 \\
+No tiny merge & 0.889 $\pm$ 0.152 & 0.932 $\pm$ 0.118 & 0.143 $\pm$ 0.359 & 85.7 \\
+No overlap split & 0.891 $\pm$ 0.152 & 0.941 $\pm$ 0.090 & 0.286 $\pm$ 0.561 & 76.2 \\
+No Gaussian refinement & 0.823 $\pm$ 0.205 & 0.875 $\pm$ 0.166 & 0.048 $\pm$ 0.218 & 95.2 \\
+V3.1 backbone & 0.786 $\pm$ 0.265 & 0.824 $\pm$ 0.251 & 0.571 $\pm$ 0.811 & 61.9 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

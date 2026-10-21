@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering
+\caption{Frozen official-source common-data comparison. Coverage must be read together with accepted-set metrics. All values are means across three seeds.}
+\label{tab:modern}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrr}
+\toprule
+Dataset & Method & Coverage & Exact-$K$ all & Exact-$K$ accepted & ARI accepted & Runtime (s)\\
+\midrule
+Breast Cancer & DeepDPM & 1.0 & 1.0 & 1.0 & 0.718 & 178.7\\
+ & GuardK v0.4 & 1.0 & 1.0 & 1.0 & 0.671 & 1.7\\
+ & UNSEEN & 1.0 & 0.0 & 0.0 & 0.407 & 34.3\\
+\addlinespace
+Digits & DeepDPM & 1.0 & 0.0 & 0.0 & 0.050 & 301.3\\
+ & GuardK v0.4 & 0.0 & 0.0 & -- & -- & 4.3\\
+ & UNSEEN & 1.0 & 0.0 & 0.0 & 0.603 & 103.6\\
+\addlinespace
+Iris & DeepDPM & 1.0 & 0.0 & 0.0 & 0.174 & 174.2\\
+ & GuardK v0.4 & 1.0 & 0.0 & 0.0 & 0.568 & 1.1\\
+ & UNSEEN & 1.0 & 0.0 & 0.0 & 0.553 & 10.6\\
+\addlinespace
+Wine & DeepDPM & 1.0 & 0.0 & 0.0 & 0.000 & 155.7\\
+ & GuardK v0.4 & 0.0 & 0.0 & -- & -- & 1.2\\
+ & UNSEEN & 1.0 & 0.0 & 0.0 & 0.476 & 11.4\\
+\bottomrule
+\end{tabular}}
+\end{table}
