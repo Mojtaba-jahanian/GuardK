@@ -2,11 +2,12 @@ cff-version: 1.2.0
 message: "Please cite the GuardK research software and the published article when available."
 title: "GuardK: Frozen research implementation and experimental evidence"
 type: software
-version: "0.4.0-source-preview"
 authors:
   - family-names: Jahanian
     given-names: Mojtaba
     orcid: "https://orcid.org/0009-0006-3241-5595"
+license: "MIT"
+repository-code: "https://github.com/Mojtaba-jahanian/GuardK"
 keywords:
   - clustering
   - unknown cardinality
