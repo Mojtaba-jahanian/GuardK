@@ -1,0 +1,28 @@
+{
+  "stage": "G8",
+  "status": "COMPLETE_BIOMEDICAL_FAILURE_STRESS",
+  "dataset": "sklearn Wisconsin Diagnostic Breast Cancer",
+  "clinical_validation_claim": false,
+  "ground_truth_used_by_guardk_fit": false,
+  "ground_truth_used_for_controlled_subsampling": true,
+  "ground_truth_used_for_external_evaluation": true,
+  "levels": [
+    "native",
+    "balanced",
+    "minority_50pct",
+    "minority_25pct",
+    "minority_10pct"
+  ],
+  "seeds": [
+    19001,
+    20011,
+    21013,
+    22019,
+    23021
+  ],
+  "k_range": [
+    2,
+    8
+  ],
+  "interpretation": "Biomedical stress/failure analysis only; not subtype discovery or clinical validation."
+}

@@ -1,0 +1,1 @@
+The G11 terminal-status capture omits its connection preamble and server addresses. Scientific status/result lines are retained. SHA256SUMS records the public files after this removal; it is not a claim that the sanitized log has the byte identity of the private terminal capture.

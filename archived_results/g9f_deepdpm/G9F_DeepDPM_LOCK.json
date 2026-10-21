@@ -1,0 +1,9 @@
+{
+  "status": "COMPLETE_OFFICIAL_DEEPDPM_CPU_COMMON_DATA",
+  "official_source_modified": false,
+  "ground_truth_passed_to_fit": false,
+  "init_k": 1,
+  "max_epochs": 500,
+  "device": "cpu",
+  "post_hoc_tuning": false
+}

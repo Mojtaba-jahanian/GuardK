@@ -4,6 +4,10 @@
 
 Author: **Mojtaba Jahanian** ([ORCID](https://orcid.org/0009-0006-3241-5595)).
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23535183.svg)](https://doi.org/10.5281/zenodo.23535183)
+
+Archived source release: **v0.4.0.1**. The algorithm remains GuardK v0.4.
+
 ## Release scope
 
 This repository contains the **recovered original GuardK v0.4 research implementation**, original experiment scripts, archived per-run confirmatory results, selected frozen protocol records, and figure-reproduction tools. Source was recovered from the G10B evidence export, not reconstructed from the manuscript. The two core modules match the G9 recorded SHA256 values; see `docs/provenance/FROZEN_SOURCE_VERIFICATION.json`.
@@ -99,8 +103,8 @@ The earlier method was called AutoUOT-DC. Its stronger controlled and pan-cancer
 
 ## Data and rights
 
-Only derived benchmark/experimental summaries are included. No raw patient-level clinical records or source datasets are redistributed. Obtain datasets from their original sources and comply with their access and reuse terms. No general open-source license is granted by this preview; see `RIGHTS.md`.
+Only derived benchmark/experimental summaries are included. No raw patient-level clinical records or source datasets are redistributed. Obtain datasets from their original sources and comply with their access and reuse terms. Original GuardK software is available under the MIT License (`LICENSE`). Original research documentation and derived results are available under CC BY 4.0. Third-party material retains its own terms. See `RIGHTS.md` for scope and the status of the earlier Zenodo archive.
 
 ## Citation
 
-Use `CITATION.cff` to identify this software and evidence package. No journal DOI or public archive DOI has been assigned in these files. Update the citation metadata after publication or an archived release.
+Use `CITATION.cff` to identify this software and evidence package. The archived source DOI is [10.5281/zenodo.23535183](https://doi.org/10.5281/zenodo.23535183), release v0.4.0.1. This is a software DOI, not a journal-article DOI. The DOI snapshot contains the core source, while additional experiments, evidence and documentation supplied here are not all part of that immutable snapshot.

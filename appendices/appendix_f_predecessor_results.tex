@@ -1,0 +1,195 @@
+\section{Predecessor AutoUOT-DC Results Retained for Auditability}\label{app:predecessor-results}
+\textbf{Status.} The results below are reproduced from the base manuscript with their original stage labels. They document the evidence that motivated GuardK but are not relabeled as GuardK results and are excluded from the new confirmatory claims.
+
+
+
+\subsubsection{Overview of the evaluated evidence}
+Results are presented in the order of evidential strength: controlled recovery experiments, held-out stress tests, broad real-data transfer, a locked disease-specific external evaluation, and post-lock mechanistic analyses. Positive and negative outcomes are reported together because several later experiments define the boundary between stable cluster-number selection and biologically correct subtype recovery. Selected controlled, broad-transfer, locked-cohort and component results are also presented in the main article under an explicit predecessor-development heading. This appendix retains the full stage-specific record.
+
+\subsubsection{Controlled robustness and unknown-$K$ recovery}
+\input{tables/table_v32_main}
+
+The overlap-aware multi-scale configuration achieved NMI $0.890\pm0.147$, ARI $0.937\pm0.103$, and exact recovery of the unknown cluster count in 94.3\% of 35 development runs. Relative to the immediately preceding consolidation design, mean count error decreased from 0.600 to 0.057. Matched tests showed improvements in NMI ($p=1.40\times10^{-6}$), ARI ($p=1.54\times10^{-6}$), and count error ($p=1.74\times10^{-4}$).
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/synthetic/fig_v32_overall_nmi.pdf}
+\caption{Overall NMI with 95\% confidence intervals.}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/synthetic/fig_v32_scenario_k_error.pdf}
+\caption{Scenario-wise cluster-count error.}
+\end{subfigure}
+\caption{Controlled robustness of the overlap-aware multi-scale design. The method improved both partition agreement and unknown-$K$ recovery, although the combined-hard scenario remained substantially more difficult than the isolated stress settings.}
+\label{fig:controlled-main}
+\end{figure}
+
+\input{tables/table_v32_scenarios}
+\FloatBarrier
+Exact $K$ was recovered for every seed in the reference, severe-imbalance, high-overlap, 20\% outlier, six-subtype, and strong-$K_0$ scenarios. The combined-hard setting was the principal failure region: exact-$K$ recovery fell to 60\%, NMI to $0.638\pm0.058$, and rare recall to $0.320\pm0.311$. Thus, the strong macro result did not eliminate the joint difficulty created by severe imbalance, overlap, and contamination.
+
+\subsubsection{Component ablation and held-out generalization}
+\input{tables/table_v32_ablation}
+Gaussian refinement produced the largest NMI and ARI contribution, whereas overlap splitting primarily affected cardinality recovery. Removing overlap splitting changed mean NMI only marginally but reduced exact-$K$ recovery from 95.2\% to 76.2\%. This separation between partition agreement and cardinality recovery supports reporting both metric families.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.82\textwidth]{figures/synthetic/fig_v32_ablation_nmi.pdf}
+\caption{Ablation of the overlap-aware multi-scale consolidation components.}
+\label{fig:v32-ablation-reviewed}
+\end{figure}
+
+\input{tables/table_v32_heldout}
+\FloatBarrier
+On five unseen scenarios, the fixed configuration achieved NMI $0.929\pm0.068$, ARI $0.953\pm0.061$, and rare recall $0.868\pm0.328$. Exact-$K$ recovery was 64.0\%, clearly above the non-oracle comparators but substantially below the 94.3\% development rate. The held-out result therefore supports transfer of partition quality more strongly than transfer of exact cardinality recovery.
+
+\subsubsection{Broad real-data transfer and dataset dependence}
+Direct transfer of the controlled design produced dataset-macro NMI 0.358, ARI 0.293, and no exact-$K$ recovery across 25 runs. The stability-consensus redesign increased the corresponding independent-run means to 0.541 and 0.510. Matched Wilcoxon tests confirmed improvement over the direct transfer in NMI ($p=1.49\times10^{-6}$) and ARI ($p=5.25\times10^{-6}$), and improvement over GMM+BIC in NMI ($p=0.0296$) and ARI ($p=0.00882$). Count error, however, was not significantly improved.
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/real/fig_v41_v4_nmi.png}
+\caption{Direct transfer versus stability consensus.}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/real/fig_v41_bootstrap_nmi.png}
+\caption{Consensus NMI with bootstrap intervals.}
+\end{subfigure}
+\caption{Broad real-data benchmark. Stability consensus substantially improved the direct transfer, but the magnitude of the gain varied by dataset.}
+\label{fig:real-broad-reviewed}
+\end{figure}
+
+\input{tables/table_v41_real}
+The strongest result was TCGA-PANCAN, where the five broad cancer groups were recovered with NMI 0.956, ARI 0.965, ACC 0.986, macro-F1 0.986, and rare recall 0.962. WDBC and Dermatology also showed useful agreement. In contrast, Mice Protein was under-clustered and Parkinsons showed almost no partition agreement with the binary reference. The dataset-macro consensus was NMI 0.578 and ARI 0.540, with exact-$K$ recovery on two of five datasets.
+
+\FloatBarrier
+The mechanism audit materially narrows the interpretation of these gains. The raw PCA anchor was selected in every final consensus partition, and guarded UOT refinement was accepted only for Dermatology. The broad-benchmark improvement is therefore attributed primarily to multi-seed stability selection and rejection of harmful refinements, rather than to uniform superiority of either the deep representation or adaptive UOT.
+
+\subsubsection{Effect of end-to-end stability regularization}
+The end-to-end stability-regularized model achieved dataset-macro NMI 0.571 and ARI 0.523, slightly below the V4.1 consensus values of 0.578 and 0.540. Removing both stability losses produced virtually identical NMI and ARI: the matched tests yielded $p=0.776$ for NMI and $p=0.955$ for ARI. Temporal partition stability increased by 0.009 on average ($p=0.0318$), driven mainly by a 0.042 increase on TCGA-PANCAN, but this did not translate into higher agreement with the external labels.
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/results_later/fig_v42_vs_v41_nmi.pdf}
+\caption{Stability consensus versus end-to-end stability-UOT.}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/results_later/fig_v42_temporal_stability.pdf}
+\caption{Effect of the stability losses on late-epoch plan stability.}
+\end{subfigure}
+\caption{The stability losses made assignments more temporally consistent without improving external clustering agreement.}
+\label{fig:v42-reviewed}
+\end{figure}
+
+\FloatBarrier
+This negative result is mechanistically important: consistency regularization can preserve a stable but biologically suboptimal partition. The detailed per-dataset table is reported as Supplementary Table S2.
+
+\subsubsection{Locked breast-cancer external evaluation}
+The decisive non-circular breast-cancer experiment did not reproduce the strong pan-cancer result. In TCGA-BRCA, the locked consensus selected four clusters and achieved NMI 0.326 and ARI 0.243. The clusters were associated with overall survival ($p=0.0077$), but the rare Normal-like subtype was not recovered. Independent application of the same feature panel and frozen settings to METABRIC again selected four clusters, with NMI 0.157 and ARI 0.073; the survival association did not replicate ($p=0.614$).
+
+\input{tables/table_locked_brca_metabric}
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/results_later/fig_locked_consensus_quality.png}
+\caption{Consensus agreement with PAM50.}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/results_later/fig_locked_selected_k.png}
+\caption{Seed-wise selected cluster counts.}
+\end{subfigure}
+
+\vspace{0.6em}
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/results_later/fig_tcga_brca_survival.png}
+\caption{TCGA-BRCA overall survival.}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/results_later/fig_metabric_survival.png}
+\caption{METABRIC overall survival.}
+\end{subfigure}
+\caption{Locked disease-specific evaluation. The fixed protocol selected four clusters in both cohorts. Agreement with PAM50 was modest, and the TCGA-BRCA survival association did not reproduce in METABRIC.}
+\label{fig:locked-brca-reviewed}
+\end{figure}
+
+\FloatBarrier
+Guarded UOT refinement was rejected in both cohorts. K-means+silhouette obtained higher NMI in both datasets but selected only two clusters; oracle-$K$ K-means reached NMI 0.371 in TCGA-BRCA and 0.335 in METABRIC but used the true value $K=5$. No tested configuration simultaneously solved the unknown-$K$, agreement, rare-subtype, and replication requirements. The locked experiment therefore does not support a claim that the current AutoUOT-DC configuration discovers the five PAM50 subtypes.
+
+\subsubsection{Post-lock cross-cohort representation and cardinality development}
+The subsequent pathway analysis identified a genuine positive signal that did not depend on clustering performance: PAM50 subtype-specific pathway signatures were highly reproducible across TCGA-BRCA and METABRIC, with Spearman correlations from 0.834 for HER2-enriched to 0.966 for Luminal A. Nevertheless, label-free pathway-only and fused views selected only two or three clusters and failed to recover the rare Normal-like subtype. This showed that cross-cohort stability can favor a reproducible but over-coarse biological partition.
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}[t]{0.32\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/results_later/fig_v50_pathway_signature_reproducibility.pdf}
+\caption{Reproducibility of subtype-related pathway signatures.}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.32\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/results_later/fig_v51_selected_k.pdf}
+\caption{Five-cluster selection across seeds.}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.32\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/results_later/fig_v51_anti_underclustering.pdf}
+\caption{Anti-underclustering elbow criterion.}
+\end{subfigure}
+\caption{Cross-cohort development after the locked evaluation. Pathway signatures were reproducible, and the anti-underclustering rule selected $K=5$ consistently, but this did not by itself establish correct subtype assignments.}
+\label{fig:cross-cohort-reviewed}
+\end{figure}
+
+\FloatBarrier
+The anti-underclustering selector subsequently chose $K=5$ in all five seeds for both development cohorts. NMI increased by 0.049 relative to the preceding gene--pathway configuration in TCGA-BRCA and by 0.039 in METABRIC.
+
+\input{tables/table_v51_main_reviewed}
+
+The improvement was primarily a granularity result. Cross-cohort transport produced small, directionally positive gains over no transport, but the five-seed Wilcoxon tests were $p=0.0625$. Balanced and unbalanced transport were nearly identical, and removing rare-mass attenuation did not reduce rare recall. GMM+BIC obtained slightly higher NMI but selected eight clusters in every run. The later configuration therefore supports stable five-class cardinality selection in development, not reliable PAM50 subtype recovery or a specific UOT advantage.
+
+\subsubsection{Teacher--student refinement and component-level evidence}
+The multi-view teacher--student extension did not improve the stronger cross-cohort development result. On the five shared seeds, NMI decreased by 0.0405 in TCGA-BRCA and 0.0170 in METABRIC; ARI, macro-F1, and rare recall also decreased. The multi-view teacher had mean confidence 0.354 in TCGA-BRCA and 0.244 in METABRIC, indicating that the consensus pseudo-labels were not sufficiently decisive.
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/results_later/fig_v52_vs_v51_nmi.pdf}
+\caption{Teacher--student refinement versus the anti-underclustering baseline.}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/results_later/fig_v52_teacher_confidence.pdf}
+\caption{Teacher confidence by construction strategy.}
+\end{subfigure}
+\caption{Negative teacher--student result. The refinement reduced NMI, and the multi-view teacher was less confident than the simpler single-view teacher.}
+\label{fig:v52-reviewed}
+\end{figure}
+
+\FloatBarrier
+Removing the teacher increased ARI in both cohorts. Balanced and unbalanced transport again produced indistinguishable results, and removing rare weighting improved several agreement metrics without a consistent rare-recall penalty. \Cref{tab:component-evidence} summarizes the late-stage component evidence, while the fuller ablation table is provided as Supplementary Table S4.
+
+\input{tables/table_component_evidence}
+\FloatBarrier
+
+\subsubsection{Evidence synthesis}
+\input{tables/table_claim_status}
+\FloatBarrier
+
+The complete evidence supports strong controlled unknown-$K$ recovery and demonstrates that guarded stability selection can substantially improve broad real-data transfer. It also supports a narrower development claim: cross-cohort anti-underclustering can stabilize the selected cardinality at five. The same evidence does not support reliable PAM50 discovery, external replication of the breast-cancer partition, superiority of unbalanced over balanced transport, or benefit from the implemented rare-mass and teacher--student components. These boundaries are retained in the main article and in this development record.
+
+Complete numerical provenance, late-stage per-dataset tables, and component ablations are provided in Supplementary Information, Sections S2 and S4.
+\FloatBarrier

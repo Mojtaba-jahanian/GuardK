@@ -1,0 +1,16 @@
+\section{Reproducibility Checklist}\label{app:reproducibility}
+\begin{enumerate}[leftmargin=2em,itemsep=2pt]
+\item Outcome and subtype labels were withheld from preprocessing, representation learning, stopping, $K$ selection, view selection, and UOT acceptance.
+\item Development, held-out, and locked-evaluation roles are distinguished explicitly; post-lock analyses are not presented as independent external validation.
+\item Development and held-out seeds, candidate-$K$ ranges, and protocol hashes are preserved in versioned configuration files.
+\item Raw per-run CSV logs and consolidated summaries are retained for the principal controlled and real-data stages.
+\item Tables and plots are generated from consolidated logs rather than manually typed values.
+\item Oracle-$K$ baselines are clearly marked and excluded from fair unknown-$K$ ranking.
+\item Bootstrap confidence intervals, paired tests, failure scenarios, rejected refinements, and negative ablations are disclosed.
+\item Dataset identifiers, repository terms, and access conditions are listed in the code/data release manifest; controlled-access data are not redistributed.
+\item A public or anonymized code repository URL, archival DOI, and exact environment lock file must be inserted before submission.
+\item Gene-set provenance must be finalized using an official versioned release before any new confirmatory external validation.
+\item The final GuardK v0.4 thresholds were frozen before the 288-case confirmatory grid; no post-hoc threshold change was permitted after G9 inspection.
+\item Ground-truth labels were not passed to GuardK fit, candidate scoring, or the outer reproducibility guard; the controlled G8 labels were used only to construct prevalence-stress subsets.
+\item Modern comparator source commits and dependency locks for UNSEEN and DeepDPM were preserved before reporting the common-data table.
+\end{enumerate}

@@ -1,0 +1,291 @@
+\section{Predecessor AutoUOT-DC Method: Development Record}\label{app:predecessor-method}
+\textbf{Status.} This appendix preserves the original base-manuscript formulation for auditability. It is predecessor development evidence and is not the frozen GuardK method.
+
+
+Let $\mathcal{X}=\{\vect{x}_i\}_{i=1}^{n}$ be an unlabeled medical dataset with $\vect{x}_i\in\R^{d_x}$. An encoder $f_{\theta}$ maps each observation to $\vect{z}_i=f_{\theta}(\vect{x}_i)\in\R^{d_z}$. The model starts with $K_0$ candidate prototypes $\{\vect{c}_j\}_{j=1}^{K_0}$, where $K_0$ is intentionally larger than the anticipated active cluster count. The reference count $K^{\star}$ is used only for evaluation, and $\widehat K$ is the label-free model estimate.
+
+\begin{table}[t]
+\centering
+\caption{Core notation.}
+\label{tab:notation}
+\small
+\begin{tabularx}{\textwidth}{>{$}l<{$} X}
+\toprule
+\text{Symbol} & \text{Definition} \\
+\midrule
+n,d_x,d_z & Number of observations, input dimension, and latent dimension \\
+\vect{x}_i,\vect{z}_i & Observation and latent embedding \\
+K_0,K^{\star},\widehat K & Initial, reference, and estimated cluster counts \\
+\vect{c}_j & Candidate prototype $j$ \\
+\Transport=[P_{ij}] & Sample-to-prototype transport plan \\
+\vect{a},\vect{b} & Source sample masses and target prototype priors \\
+u_i,a_i & Sample uncertainty and reliability-adjusted mass \\
+m_j,R_j & Received prototype mass and prototype reliability \\
+\epsilon,\tau_r,\tau_c & Entropic and marginal-relaxation parameters \\
+\Active & Set of active prototypes \\
+\mathcal{V},\mathcal{H} & Candidate representation views and clustering families \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+For cost matrix $\mat D\in\R_+^{n\times K}$ and prescribed marginals $\vect a,\vect b$, balanced entropy-regularized OT solves
+\begin{equation}
+\min_{\Transport\ge0}\langle\Transport,\mat D\rangle-\epsilon\mathcal H(\Transport)
+\quad\text{s.t.}\quad
+\Transport\Ones=\vect a,\;\Transport^\top\Ones=\vect b,
+\label{eq:balanced_ot}
+\end{equation}
+where $\mathcal H(\Transport)=-\sum_{ij}P_{ij}(\log P_{ij}-1)$. UOT replaces exact constraints by KL penalties:
+\begin{equation}
+\min_{\Transport\ge0}\langle\Transport,\mat D\rangle-\epsilon\mathcal H(\Transport)
++\tau_r\KL(\Transport\Ones\|\vect a)
++\tau_c\KL(\Transport^\top\Ones\|\vect b).
+\label{eq:generic_uot}
+\end{equation}
+The objective is to learn a representation, assignment, and active prototype set that preserve coherent rare groups, reduce the influence of ambiguous observations, and estimate $\widehat K$ without access to evaluation labels.
+
+
+
+\subsubsection{Design objective and overall architecture}
+AutoUOT-DC is designed for medical subtype discovery when the number of clinically meaningful groups is unknown, cluster sizes are strongly unequal, rare subtypes must not be removed as numerical noise, and ambiguous observations should not be forced into confident assignments. Let $\mathcal X=\{\vect x_i\}_{i=1}^{n}$ denote the unlabeled observations and let $f_{\theta}$ map each observation to a latent embedding $\vect z_i\in\R^{d_z}$. The model starts from an intentionally over-complete prototype bank $\Prototypes=\{\vect c_j\}_{j=1}^{K_0}$ with $K_0$ larger than the anticipated active count. During optimization, uncertainty-adjusted sample masses, generalized unbalanced optimal transport (UOT), and mass-based prototype adaptation jointly determine the active set $\Active$ and the label-free estimate $\widehat K=|\Active|$.
+
+\Cref{fig:overall_framework} summarizes the complete architecture. Medical images, clinical/tabular variables, or omics features are mapped to a structure-preserving latent space. An uncertainty module converts assignment ambiguity into sample reliability masses; a UOT layer transports these masses to the over-complete prototype bank without enforcing equal cluster sizes; and a persistent prune--merge--retain mechanism removes weak or redundant components while protecting coherent low-mass prototypes. The final outputs are sample assignments, the estimated number of active clusters, rare-subtype candidates, and ambiguous/outlier indicators.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/architecture/fig1_overall_framework.png}
+\caption{Overall framework of AutoUOT-DC. A deep encoder produces latent embeddings; uncertainty-adjusted source masses and adaptive UOT determine sample-to-prototype transport; mass-based cluster adaptation prunes weak prototypes, merges redundant prototypes, and retains coherent low-mass components; and iterative prototype/prior updates yield subtype assignments, the estimated active cluster count, rare-subtype candidates, and ambiguous observations.}
+\label{fig:overall_framework}
+\end{figure}
+\FloatBarrier
+
+\subsubsection{Structure-preserving encoder pretraining}
+The encoder $f_{\theta}$ and decoder $g_{\phi}$ are first trained to reconstruct the observations:
+\begin{equation}
+\Loss_{\mathrm{rec}}=
+\frac{1}{n}\sum_{i=1}^{n}
+\left\|\vect x_i-g_{\phi}\!\left(f_{\theta}(\vect x_i)\right)\right\|_2^2.
+\label{eq:reconstruction}
+\end{equation}
+For image data, $f_{\theta}$ may be a convolutional or transformer encoder; for tabular and omics data, it is implemented as a multilayer encoder after feature scaling. The method is therefore modality-agnostic at the transport layer: only the encoder architecture changes with the input modality.
+
+To preserve local patient geometry, a neighborhood graph $\mat W=[W_{ir}]$ is built from the preprocessed input view. Its latent regularizer is
+\begin{equation}
+\Loss_{\mathrm{graph}}=
+\frac{1}{2}\sum_{i=1}^{n}\sum_{r=1}^{n}
+W_{ir}\left\|\vect z_i-\vect z_r\right\|_2^2,
+\qquad \vect z_i=f_{\theta}(\vect x_i).
+\label{eq:graph_loss}
+\end{equation}
+For high-dimensional real cohorts, masked feature recovery and a residual structural anchor are additionally used. With a random mask $\vect m_i$ and a small perturbation $\vect\xi_i$,
+\begin{equation}
+\widetilde{\vect x}_i=\vect m_i\odot\vect x_i+\vect\xi_i,
+\qquad
+\vect z_i=f_{\theta}(\widetilde{\vect x}_i)+\alpha_r r_{\omega}(\vect x_i),
+\label{eq:residual_embedding}
+\end{equation}
+where $r_{\omega}$ is a low-capacity residual projection. The representation-stage objective is
+\begin{equation}
+\Loss_{\mathrm{repr}}=
+\Loss_{\mathrm{rec}}+
+\lambda_{\mathrm{mask}}\Loss_{\mathrm{mask}}+
+\lambda_{\mathrm{graph}}\Loss_{\mathrm{graph}}+
+\lambda_{\mathrm{geom}}\Loss_{\mathrm{geom}},
+\label{eq:repr_loss}
+\end{equation}
+where $\Loss_{\mathrm{geom}}$ penalizes changes in robust pairwise distances on the graph edges. This stage provides an initial latent space before transport-based cluster discovery begins.
+
+\subsubsection{Over-complete prototype initialization}
+The latent space is initialized with $K_0$ candidate prototypes, where $K_0$ deliberately exceeds the expected subtype count. The use of an over-complete bank separates \emph{representation capacity} from the final cluster count: the method does not commit to a fixed $K$ before observing transport mass, assignment overlap, and prototype reliability. Initial prototype priors are positive and normalized,
+\begin{equation}
+ b_j^{(0)}>0,
+ \qquad
+ \sum_{j=1}^{K_0} b_j^{(0)}=1.
+\label{eq:initial_priors}
+\end{equation}
+Diversity-preserving centroid seeding is used so that the prototype bank covers the latent support rather than concentrating in the largest mode.
+
+\subsubsection{Uncertainty-aware source masses}
+At iteration $t$, row-normalized transport produces the current soft assignment distribution $\vect q_i=(q_{i1},\ldots,q_{i|\Active|})$. Assignment entropy is converted to normalized uncertainty:
+\begin{equation}
+ u_i=-\frac{\sum_{j\in\Active}q_{ij}\log(q_{ij}+\varepsilon_0)}
+ {\log |\Active|}.
+\label{eq:uncertainty}
+\end{equation}
+A reliable observation should contribute more transport mass than an ambiguous observation, while a nonzero floor must preserve potentially rare cases. Therefore,
+\begin{equation}
+ \widetilde a_i=(1-u_i)^{\gamma}+a_{\min},
+ \qquad
+ a_i=\frac{\widetilde a_i}{\sum_{r=1}^{n}\widetilde a_r}.
+\label{eq:sample_mass}
+\end{equation}
+The exponent $\gamma$ controls the strength of reliability weighting and $a_{\min}>0$ prevents complete rejection of uncertain observations.
+
+\subsubsection{Adaptive unbalanced optimal transport}
+For active prototype $j$, the base sample-to-prototype cost is the squared latent distance. AutoUOT-DC augments it with uncertainty and neighborhood consistency:
+\begin{equation}
+ D_{ij}=\|\vect z_i-\vect c_j\|_2^2+
+ \lambda_u u_i+
+ \lambda_g\sum_{r=1}^{n}W_{ir}\|\vect z_r-\vect c_j\|_2^2.
+\label{eq:transport_cost}
+\end{equation}
+The adaptive transport plan is the solution of
+\begin{align}
+\Transport^{(t)}=\argmin_{\Transport\ge0}\;&
+\langle\Transport,\mat D\rangle-
+\epsilon\mathcal H(\Transport)\nonumber\\
+&+\tau_r\KL(\Transport\Ones\|\vect a^{(t)})+
+\tau_c\KL(\Transport^{\top}\Ones\|\vect b^{(t)}),
+\label{eq:adaptive_uot}
+\end{align}
+where $\mathcal H(\Transport)=-\sum_{ij}P_{ij}(\log P_{ij}-1)$ is transport entropy. In contrast with balanced OT, the KL-relaxed row and column marginals permit partial transport and unequal prototype masses. This property is essential for imbalanced medical subtypes because the optimizer is not required to allocate equal mass to all prototypes.
+
+The transport plan provides two statistics used by the adaptive module:
+\begin{equation}
+ q_{ij}=\frac{P_{ij}}{\sum_{\ell\in\Active}P_{i\ell}+\varepsilon_0},
+ \qquad
+ m_j=\sum_{i=1}^{n}P_{ij}.
+\label{eq:assignment_mass}
+\end{equation}
+Here $q_{ij}$ is the soft membership of observation $i$ and $m_j$ is the mass received by prototype $j$. \Cref{fig:uot_module} shows how latent embeddings, uncertainty masses, prototype priors, transport optimization, and active-set statistics are connected.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/architecture/fig2_adaptive_uot_module.png}
+\caption{Adaptive unbalanced optimal transport module. Latent embeddings, uncertainty-adjusted sample masses, candidate prototypes, and prototype priors define the transport problem. KL-relaxed marginals and entropic regularization yield soft assignments and received prototype masses, which drive prototype pruning, overlap-aware merging, active-cluster retention, and prototype/prior updates.}
+\label{fig:uot_module}
+\end{figure}
+\FloatBarrier
+
+\subsubsection{Prototype reliability and rare-mass preservation}
+Low received mass alone is not sufficient evidence for pruning because a clinically important rare subtype may be small but coherent. AutoUOT-DC therefore combines mass, assignment confidence, and within-prototype dispersion. Let
+\begin{equation}
+ \overline u_j=
+ \frac{\sum_iP_{ij}u_i}{m_j+\varepsilon_0},
+ \qquad
+ s_j=\frac{\sum_iP_{ij}\|\vect z_i-\vect c_j\|_2^2}
+ {m_j+\varepsilon_0}.
+\label{eq:prototype_stats}
+\end{equation}
+A normalized reliability score is defined as
+\begin{equation}
+ R_j=\widetilde m_j(1-\overline u_j)
+ \exp\!\left(-\frac{s_j}{\widetilde s+\varepsilon_0}\right),
+\label{eq:prototype_reliability}
+\end{equation}
+where $\widetilde m_j$ is the received mass after robust normalization and $\widetilde s$ is a robust reference dispersion. A prototype is eligible for pruning only when low reliability persists for $T_p$ consecutive adaptation steps. Conversely, a low-mass prototype is protected as a rare-subtype candidate when it has low mean uncertainty, compact local geometry, and stable neighborhood support.
+
+\subsubsection{Overlap-aware pruning, merging, and refinement}
+To identify redundant prototypes, pairwise assignment overlap is measured by
+\begin{equation}
+ O_{j\ell}=
+ \frac{\sum_i\min(q_{ij},q_{i\ell})}
+ {\sum_i\max(q_{ij},q_{i\ell})+\varepsilon_0}.
+\label{eq:overlap}
+\end{equation}
+Prototype separation is normalized by local scales $\sigma_j$ and $\sigma_{\ell}$:
+\begin{equation}
+ \Delta_{j\ell}=\frac{\|\vect c_j-\vect c_{\ell}\|_2}
+ {\sqrt{\sigma_j^2+\sigma_{\ell}^2}+\varepsilon_0}.
+\label{eq:scaled_distance}
+\end{equation}
+Two prototypes are merged only when high overlap or small normalized distance is persistent, thereby reducing accidental fusion caused by a single noisy iteration. Negligible fragments are absorbed unless they satisfy the rare-mass protection rule. A high-dispersion prototype may be split only when local multimodality remains stable under perturbation. After active-set adaptation, covariance-aware Gaussian refinement can be applied to represent anisotropic cluster geometry.
+
+\subsubsection{Prototype and prior updates}
+For every retained prototype,
+\begin{equation}
+ \vect c_j^{(t+1)}=
+ \frac{\sum_iP_{ij}^{(t)}\vect z_i}{m_j^{(t)}+\varepsilon_0},
+ \qquad
+ b_j^{(t+1)}=(1-\rho)b_j^{(t)}+
+ \rho\frac{m_j^{(t)}}{\sum_{\ell\in\Active}m_{\ell}^{(t)}}.
+\label{eq:prototype_prior_update}
+\end{equation}
+The moving prior update avoids abrupt changes in target mass, while the weighted centroid update moves each prototype toward the observations it currently transports. Following pruning or merging, the priors are renormalized over the active set.
+
+\subsubsection{Joint objective and alternating optimization}
+The continuous terms optimized between discrete active-set updates are summarized by
+\begin{equation}
+\Loss_{\mathrm{total}}=
+\lambda_{\mathrm{repr}}\Loss_{\mathrm{repr}}+
+\lambda_{\mathrm{uot}}\Loss_{\mathrm{uot}}+
+\lambda_{\mathrm{sep}}\Loss_{\mathrm{sep}}+
+\lambda_{\mathrm{unc}}\Loss_{\mathrm{unc}}+
+\lambda_K\mathcal R_K.
+\label{eq:total_loss}
+\end{equation}
+$\Loss_{\mathrm{uot}}$ is the objective in \Cref{eq:adaptive_uot}; $\Loss_{\mathrm{sep}}$ discourages coincident active prototypes; $\Loss_{\mathrm{unc}}$ aligns estimated uncertainty with assignment entropy; and $\mathcal R_K$ penalizes unsupported active components without directly prescribing the final count. Pruning, merging, and optional splitting are discrete adaptations, so global optimality is not claimed.
+
+As depicted in \Cref{fig:workflow}, optimization has three stages. First, the encoder--decoder is pretrained to obtain the initial latent space. Second, cluster discovery alternates between uncertainty estimation, UOT solution, prototype/prior update, and active-set adaptation. Third, the converged model returns the inference outputs. Iteration stops when both the objective variation and the active prototype set remain stable for a specified patience window.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/architecture/fig3_training_workflow.png}
+\caption{Optimization and inference workflow of AutoUOT-DC. Encoder--decoder pretraining is followed by alternating uncertainty estimation, adaptive UOT assignment, prototype/prior updating, and persistent prune--merge adaptation. Convergence requires stabilization of both the objective and active cluster set. The final model outputs sample assignments, the estimated cluster count, rare-subtype candidates, and ambiguous/outlier observations.}
+\label{fig:workflow}
+\end{figure}
+\FloatBarrier
+
+\subsubsection{Inference outputs}
+The final hard subtype assignment is
+\begin{equation}
+ \widehat y_i=\argmax_{j\in\Active}q_{ij},
+ \qquad
+ \widehat K=|\Active_{\mathrm{subtype}}|,
+\label{eq:inference}
+\end{equation}
+where $\Active_{\mathrm{subtype}}$ excludes components classified as reject/outlier absorbers. Rare-subtype flags are assigned to persistent, reliable, low-mass prototypes. A sample is marked ambiguous when its maximum soft membership is below a confidence threshold or when its normalized assignment entropy exceeds an uncertainty threshold. These flags are intended for clinical review rather than automatic removal from the cohort.
+
+\subsubsection{Guarded stability consensus for real cohorts}
+A direct end-to-end latent/UOT update can occasionally be less stable than a simpler structural partition. The real-cohort implementation therefore adds a label-free selection guard. Candidate views $v\in\mathcal V$ (raw structural anchor, masked latent view, and fused view), clustering families $h\in\mathcal H$, and candidate counts $k$ are evaluated under bootstrap perturbations. The selection score is
+\begin{equation}
+S(v,h,k)=\lambda_s\overline{\ARI}_{\mathrm{boot}}+
+\lambda_v A_{\mathrm{view}}+
+\lambda_i I_{\mathrm{internal}}-
+\lambda_c C_{\mathrm{degenerate}},
+\label{eq:stability_score}
+\end{equation}
+where $A_{\mathrm{view}}$ is cross-view agreement, $I_{\mathrm{internal}}$ is a label-free internal-quality term, and $C_{\mathrm{degenerate}}$ penalizes tiny or collapsed clusters. Across selection seeds,
+\begin{equation}
+ \widehat K_{\mathrm{cons}}=
+ \median\{\widehat K^{(1)},\ldots,\widehat K^{(S)}\},
+\label{eq:consensus_k}
+\end{equation}
+and the final partition is the medoid partition maximizing mean pairwise ARI to the other selected partitions.
+
+For anisotropic clusters, the Euclidean transport cost can be replaced by
+\begin{equation}
+D^{\mathrm{mah}}_{ij}=(\vect z_i-\vect c_j)^{\top}
+(\mat\Sigma_j+\lambda_{\Sigma}\mat I)^{-1}
+(\vect z_i-\vect c_j).
+\label{eq:mahalanobis_cost}
+\end{equation}
+The covariance-aware UOT refinement is accepted only when it satisfies the pre-specified label-free stability and internal-quality guard. This safeguard prevents an unstable refinement from replacing a more reproducible partition.
+
+\begin{algorithm}[t]
+\caption{AutoUOT-DC with adaptive UOT and guarded stability consensus}
+\label{alg:autouot}
+\begin{algorithmic}[1]
+\Require Unlabeled data $\mathcal X$, over-complete count $K_0$, candidate views $\mathcal V$, clustering families $\mathcal H$, and selection seeds.
+\Ensure Partition $\widehat{\vect y}$, estimated count $\widehat K$, rare-subtype flags, and ambiguity indicators.
+\State Preprocess the data and fit the structure-preserving encoder--decoder.
+\State Initialize $K_0$ latent prototypes and normalized positive priors.
+\Repeat
+  \State Compute soft assignments, entropy-based uncertainties, and source masses.
+  \State Construct the cost matrix and solve generalized UOT.
+  \State Compute received masses, prototype reliability, overlap, and dispersion.
+  \State Apply persistent pruning, rare-mass preservation, and overlap-aware merging/refinement.
+  \State Update active prototypes and target priors.
+\Until{the objective and active set satisfy the stopping criterion}
+\For{each selection seed, candidate view, family, and count}
+  \State Evaluate bootstrap stability and label-free internal criteria.
+\EndFor
+\State Select the consensus count and medoid partition.
+\State Accept covariance-aware UOT refinement only when the stability guard passes.
+\State Return assignments, $\widehat K$, rare-subtype candidates, and ambiguous/outlier flags.
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Computational complexity}
+An encoder pass costs $\mathcal O(nC_f)$, where $C_f$ is the per-sample encoder cost. Each generalized Sinkhorn iteration costs approximately $\mathcal O(n|\Active|)$ in memory and arithmetic for a dense cost matrix. Prototype-pair screening costs $\mathcal O(|\Active|^2d_z)$, while prototype updates cost $\mathcal O(n|\Active|d_z)$. The stability-consensus layer multiplies the candidate-clustering cost by the number of views, clustering families, candidate counts, bootstrap repetitions, and selection seeds; these runs are independent and can be parallelized. In practice, the intentionally over-complete bank increases early-iteration cost, but persistent pruning reduces $|\Active|$ as optimization proceeds.
+

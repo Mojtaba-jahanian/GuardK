@@ -1,0 +1,1 @@
+PASS: original G6W_V04_API_LABEL_FREE_PASS; G6W_V04_DETERMINISM_PASS; G6W_V04_EASY_SANITY_PASS. Two fits selected K=4, decision ACCEPT, and identical diagnostics; all five outer selections were K=4. Source implementation was not changed.

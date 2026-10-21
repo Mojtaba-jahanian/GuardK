@@ -1,0 +1,15 @@
+{
+  "stage": "G9B",
+  "status": "PASS_CONFIRMATORY_SELECTIVE_CLAIM",
+  "confirmatory": true,
+  "protocol_changed_after_run": false,
+  "method_changed_after_run": false,
+  "ground_truth_used_by_guardk_fit": false,
+  "gates": {
+    "coverage_ge_0.45": true,
+    "accepted_exact_k_gain_ge_0.08_vs_v02": true,
+    "accepted_ari_not_worse_vs_v02_minus_0.02": true,
+    "accepted_worst_recall_not_worse_vs_v02_minus_0.02": true
+  },
+  "note": "This stage tests the frozen selective claim. It does not establish final SOTA because modern/deep comparators are still deferred."
+}

@@ -1,0 +1,1 @@
+PASS: five result figure pairs generated; all five PDFs opened and rendered. Image exports are buffered before writing. Figure reproduction uses supplied summaries and does not rerun clustering experiments.

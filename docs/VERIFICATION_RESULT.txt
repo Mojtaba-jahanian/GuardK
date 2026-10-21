@@ -1,0 +1,4 @@
+PASS: input hashes and existing aggregate checks.
+PASS: all six 288-case summaries reproduced from 1,728 archived per-run records.
+PASS: recovered core.py, core_v04.py and protocol lock match G9 recorded SHA256 values.
+No full experiment was rerun.

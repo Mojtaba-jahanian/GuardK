@@ -1,0 +1,34 @@
+{
+  "stage": "G6X",
+  "status": "PASS_SELECTIVE_GUARD_PROMISING",
+  "confirmatory": false,
+  "fresh_seeds": [
+    11617,
+    12721,
+    13829,
+    14939
+  ],
+  "fresh_ratios": [
+    3,
+    8,
+    30,
+    60
+  ],
+  "conditions": [
+    "clear",
+    "moderate",
+    "difficult",
+    "ambiguous"
+  ],
+  "v04_protocol_changed_after_seeing_g6x": false,
+  "ground_truth_used_by_v04_fit": false,
+  "gates": {
+    "overall_coverage_ge_0.50": true,
+    "clear_moderate_mean_coverage_ge_0.80": true,
+    "accepted_exact_k_gain_ge_0.08": true,
+    "accepted_ari_not_worse_than_v02_minus_0.02": true,
+    "v02_error_capture_ge_0.30": true
+  },
+  "error_capture": 0.45714285714285713,
+  "false_abstain_on_v02_correct": 0.13793103448275862
+}

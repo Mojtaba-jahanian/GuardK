@@ -1,0 +1,19 @@
+cohort,comparator,metric,full_mean,comparator_mean,mean_difference,statistic,p_value,note
+TCGA-BRCA,kmeans_silhouette,nmi,0.30849580965805007,0.1544537087572687,0.15404210090078144,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,kmeans_silhouette,ari,0.22662341679011178,0.1869876127363967,0.039635804053715105,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,kmeans_silhouette,rare_recall,0.1944444444444444,0.0,0.1944444444444444,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,gmm_bic,nmi,0.30849580965805007,0.33470555165869026,-0.0262097420006402,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,gmm_bic,ari,0.22662341679011178,0.19065585946463448,0.035967557325477316,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,gmm_bic,rare_recall,0.1944444444444444,0.42222222222222217,-0.22777777777777777,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,kmeans_oracle_k5,nmi,0.30849580965805007,0.2928407226284478,0.015655087029602333,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,kmeans_oracle_k5,ari,0.22662341679011178,0.20555363845742428,0.021069778332687517,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+TCGA-BRCA,kmeans_oracle_k5,rare_recall,0.1944444444444444,0.19999999999999996,-0.005555555555555564,0.0,1.0,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,kmeans_silhouette,nmi,0.29516247241733584,0.2627408407112394,0.032421631706096445,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,kmeans_silhouette,ari,0.25299482559826536,0.259687206125549,-0.006692380527283726,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,kmeans_silhouette,rare_recall,0.15857142857142853,0.0,0.15857142857142853,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,gmm_bic,nmi,0.29516247241733584,0.3048098425109272,-0.009647370093591323,1.0,0.125,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,gmm_bic,ari,0.25299482559826536,0.19590431571329642,0.05709050988496892,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,gmm_bic,rare_recall,0.15857142857142853,0.4014285714285714,-0.24285714285714288,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,kmeans_oracle_k5,nmi,0.29516247241733584,0.2854022292238022,0.009760243193533658,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,kmeans_oracle_k5,ari,0.25299482559826536,0.24486173587299104,0.00813308972527434,1.0,0.125,Exploratory; n=5 paired seeds; no multiplicity correction
+METABRIC,kmeans_oracle_k5,rare_recall,0.15857142857142853,0.13285714285714284,0.0257142857142857,0.0,0.0625,Exploratory; n=5 paired seeds; no multiplicity correction

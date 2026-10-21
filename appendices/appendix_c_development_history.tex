@@ -1,0 +1,29 @@
+\section{Development and Diagnostic History}\label{app:history}
+\begin{table*}[h]
+\centering
+\caption{Major implementation stages retained for auditability. The stage labels describe development chronology rather than independent benchmark methods.}
+\small
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+Stage & Main diagnostic conclusion \\
+\midrule
+V1 & The end-to-end UOT pipeline ran successfully, but outlier prototypes were counted as subtypes and inflated $\widehat K$. \\
+V2 & Reliability-based subtype/outlier separation recovered $K$ on an easy controlled setting. \\
+V3 & Broad controlled stress tests exposed severe prototype fragmentation and poor cardinality recovery. \\
+V3.1 & Rarity-aware consolidation and structure preservation reduced mean $K$ error below one. \\
+V3.2 & Overlap-aware multi-scale consolidation reached 94.3\% exact-$K$ recovery on development scenarios and 64.0\% on unseen stress scenarios. \\
+V4 & Direct real-data transfer failed; adaptive UOT was not superior to balanced transport on the diagnostic TCGA experiment. \\
+V4.1 & Multi-view stability consensus and guarded refinement improved broad real-data transfer, but raw PCA was selected in every final consensus and UOT was accepted only on Dermatology. \\
+V4.2 & End-to-end stability regularization increased temporal consistency without improving NMI or ARI. \\
+Locked BRCA/METABRIC & The non-circular disease-specific test selected four rather than five clusters in both cohorts; the TCGA survival association did not replicate. \\
+V5.0 & Pathway signatures were strongly reproducible across cohorts, but label-free pathway clustering preferred two or three broad groups. \\
+V5.1 & The anti-underclustering rule selected $K=5$ in every development seed; agreement remained moderate and balanced OT matched unbalanced OT. \\
+V5.2 & Teacher--student refinement reduced performance; the implemented rare weighting and unbalanced transport were not validated by ablation. \\
+G5--G6 GuardK redesign & A simplified no-OT prototype core outperformed transport variants in matched development stress; UOT and balanced OT were demoted. \\
+G6W--G6X & v0.4 restored the stronger v0.2 base selector and added an independent label-free $K$-selection reproducibility guard; fresh out-of-grid validation passed the prespecified selective gates. \\
+G7--G8 & Standard real-data and controlled Wisconsin imbalance stress were executed without post-hoc threshold tuning; results showed both acceptance and deliberate abstention. \\
+G9A--G9B & The v0.4 mechanism and claim scope were frozen before an untouched 288-case confirmatory factorial grid. \\
+G9D--G9H & Official-source UNSEEN and DeepDPM reproductions were completed and the modern comparator block was frozen with source-integrity checks. \\
+\bottomrule
+\end{tabularx}
+\end{table*}

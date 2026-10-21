@@ -1,0 +1,42 @@
+{
+  "G9F_DeepDPM_runs.csv": {
+    "sha256": "e8b0285934260aaab55d60833adc8c67a01defdbcd1ee945c3256007367e929f",
+    "bytes": 1172
+  },
+  "G9F_DeepDPM_aggregate.csv": {
+    "sha256": "5685e12173525e4bf7e34e9a798cdb2c1f932288784eda485a2429a179c89c17",
+    "bytes": 447
+  },
+  "G9F_FINAL_MODERN_COMMON_DATA.csv": {
+    "sha256": "6dba4c900e09abb798cb8a3ec3ac508bd05dadab88cb372bd73fcab14204fd1b",
+    "bytes": 1227
+  },
+  "G9F_DeepDPM_LOCK.json": {
+    "sha256": "cb3c246d24973319624cf26bfefde70e71a8c675324db4c0f39baaf5b8307857",
+    "bytes": 218
+  },
+  "protocol": {
+    "deepdpm_runs": 12,
+    "datasets": [
+      "iris",
+      "wine",
+      "breast_cancer_wisconsin",
+      "digits"
+    ],
+    "seeds": [
+      16001,
+      17011,
+      18013
+    ],
+    "coverage_explicit": true,
+    "ground_truth_used_for_fit": false,
+    "posthoc_tuning": false,
+    "deepdpm_commit": "95c9376ac1b0cb48ea017c52d3abbf2a901940b3"
+  },
+  "interpretation_lock": [
+    "DeepDPM achieved exact-K on breast_cancer_wisconsin but not on iris, wine, or digits.",
+    "GuardK_v04 abstained on digits and wine in the common-data benchmark; accepted-only metrics must not be compared without explicit coverage.",
+    "UNSEEN_DEC produced unconditional partitions on all four datasets but exact-K was zero on all four.",
+    "The comparator block supports selective cardinality reliability/abstention framing, not universal SOTA superiority."
+  ]
+}

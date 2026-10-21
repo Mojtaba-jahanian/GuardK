@@ -1,0 +1,13 @@
+\section{Generalized Sinkhorn Updates}\label{app:sinkhorn}
+Let $\mat K=\exp(-\mat D/\epsilon)$ and define exponents
+\begin{equation}
+\alpha=\frac{\tau_r}{\tau_r+\epsilon},\qquad
+\beta=\frac{\tau_c}{\tau_c+\epsilon}.
+\end{equation}
+Starting from positive scaling vectors $\vect r,\vect s$, generalized unbalanced scaling uses
+\begin{equation}
+\vect r\leftarrow\left(\frac{\vect a}{\mat K\vect s+\varepsilon_0}\right)^{\alpha},
+\qquad
+\vect s\leftarrow\left(\frac{\vect b}{\mat K^\top\vect r+\varepsilon_0}\right)^{\beta},
+\end{equation}
+followed by $\Transport=\diag(\vect r)\mat K\diag(\vect s)$. The implementation subtracts the row-wise minimum cost before exponentiation and clamps positive quantities to avoid underflow. The final code release will include the exact convergence tolerance and log-domain option used for the locked validation.

@@ -1,0 +1,23 @@
+{
+  "stage": "G7",
+  "status": "COMPLETE_STANDARD_REAL_DATA",
+  "confirmatory": false,
+  "ground_truth_used_by_guardk_fit": false,
+  "datasets": [
+    "iris",
+    "wine",
+    "breast_cancer_wisconsin",
+    "digits"
+  ],
+  "seeds": [
+    16001,
+    17011,
+    18013
+  ],
+  "k_range": [
+    2,
+    12
+  ],
+  "deep_comparators_included": false,
+  "clinical_validation_claim": false
+}

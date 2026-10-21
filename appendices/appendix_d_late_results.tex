@@ -1,0 +1,18 @@
+\section{Late-Stage Real-Data Results and Negative Ablations}\label{app:late-results}
+
+This appendix preserves the detailed late-stage tables that inform the main-text claim audit. These experiments are not presented as independent external validations. The locked TCGA-BRCA/METABRIC experiment preceded the cross-cohort pathway, anti-underclustering, and teacher--student development analyses.
+
+\subsection{End-to-end stability-regularized transport}
+\input{tables/table_v42_appendix}
+
+The full and no-stability variants had nearly identical agreement metrics across 25 matched runs. Mean temporal stability increased from 0.823 to 0.832 ($p=0.0318$), whereas NMI ($p=0.776$) and ARI ($p=0.955$) did not improve.
+
+\subsection{Pathway-representation benchmark}
+\input{tables/table_v50_appendix}
+
+The highest label-free view-ranking score was assigned to the pathway-fused representation, but it selected three clusters in both cohorts. In contrast, subtype-conditioned pathway signatures were highly reproducible across cohorts, demonstrating that biological signal was present even though the unsupervised selection criterion favored a coarser partition.
+
+\subsection{Teacher--student ablation}
+\input{tables/table_v52_appendix}
+
+The multi-view teacher was less stable and less confident than the single-view teacher, particularly in METABRIC. The full teacher--student configuration did not surpass the no-teacher variant, and the transport-balance and rare-weighting ablations did not support the corresponding mechanism claims.

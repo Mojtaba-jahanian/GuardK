@@ -1,0 +1,81 @@
+\section{Post-freeze scalability, candidate-range stress, and failure decomposition}
+\label{app:g11}
+
+This appendix records the post-freeze G11 and G11B analyses added during manuscript consolidation. Both stages were analysis-only. The frozen GuardK v0.4 implementation and thresholds were not changed, ground-truth labels were not passed to fitting, and the diagnostic reruns reproduced the earlier G11 proposals and decisions without determinism mismatches.
+
+\subsection{G11 scalability aggregate}
+\begin{table}[H]
+\centering
+\caption{Full G11 scalability aggregate (three seeds per row).}
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Method & $n$ & Coverage & Exact-$K$ all & Exact-$K$ acc. & ARI acc. & NMI acc. & Runtime (s) & Peak RSS (MB)\\
+\midrule
+GuardK v0.2 & 2,000 & 1.000 & 1.000 & 1.000 & 0.892 & 0.838 & 1.66 & 187.2\\
+GuardK v0.2 & 10,000 & 1.000 & 1.000 & 1.000 & 0.892 & 0.837 & 1.95 & 206.1\\
+GuardK v0.2 & 50,000 & 1.000 & 1.000 & 1.000 & 0.890 & 0.834 & 9.84 & 215.0\\
+GuardK v0.4 & 2,000 & 1.000 & 1.000 & 1.000 & 0.892 & 0.838 & 8.88 & 187.9\\
+GuardK v0.4 & 10,000 & 1.000 & 1.000 & 1.000 & 0.892 & 0.837 & 11.15 & 208.7\\
+GuardK v0.4 & 50,000 & 1.000 & 1.000 & 1.000 & 0.890 & 0.834 & 50.02 & 222.0\\
+K-means+silhouette & 2,000 & 1.000 & 1.000 & 1.000 & 0.891 & 0.837 & 1.64 & 164.7\\
+K-means+silhouette & 10,000 & 1.000 & 1.000 & 1.000 & 0.892 & 0.837 & 2.25 & 166.5\\
+K-means+silhouette & 50,000 & 1.000 & 1.000 & 1.000 & 0.890 & 0.834 & 14.59 & 173.1\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+The empirical log--log runtime slopes over the three tested sample sizes were 0.553 for GuardK v0.2, 0.537 for GuardK v0.4, and 0.679 for K-means+silhouette. Corresponding empirical memory slopes were 0.043, 0.052, and 0.015. These values summarize only the measured range and are not theoretical complexity exponents.
+
+\subsection{G11 candidate-range aggregate}
+\begin{table}[H]
+\centering
+\caption{Full GuardK v0.4 candidate-range aggregate at $n=2000$ (three seeds per row).}
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrrrrrr}
+\toprule
+$K^\star$ & Overlap & $K_{\max}$ & Coverage & Exact-$K$ all & Exact-$K$ acc. & $|K-K^\star|$ acc. & ARI acc. & NMI acc.\\
+\midrule
+4 & low & 8 & 1.000 & 1.000 & 1.000 & 0.0 & 0.987 & 0.972\\
+4 & low & 12 & 1.000 & 1.000 & 1.000 & 0.0 & 0.987 & 0.972\\
+4 & low & 20 & 1.000 & 1.000 & 1.000 & 0.0 & 0.987 & 0.972\\
+4 & medium & 8 & 1.000 & 1.000 & 1.000 & 0.0 & 0.892 & 0.838\\
+4 & medium & 12 & 1.000 & 1.000 & 1.000 & 0.0 & 0.892 & 0.838\\
+4 & medium & 20 & 1.000 & 1.000 & 1.000 & 0.0 & 0.892 & 0.838\\
+8 & low & 8 & 0.667 & 0.000 & 0.000 & 3.0 & 0.720 & 0.834\\
+8 & low & 12 & 0.333 & 0.000 & 0.000 & 2.0 & 0.804 & 0.888\\
+8 & low & 20 & 0.333 & 0.000 & 0.000 & 2.0 & 0.804 & 0.888\\
+8 & medium & 8 & 0.333 & 0.000 & 0.000 & 5.0 & 0.451 & 0.560\\
+8 & medium & 12 & 0.667 & 0.000 & 0.000 & 5.0 & 0.456 & 0.574\\
+8 & medium & 20 & 0.333 & 0.000 & 0.000 & 5.0 & 0.452 & 0.574\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+Across the 12 paired dataset/seed combinations used to compare candidate ranges, the base proposal agreement rate was 0.917, the final decision agreement rate was 0.583, and the reported-cardinality agreement rate was 0.667. Thus changing $K_{\max}$ altered some abstention decisions, but the dominant $K^\star=8$ under-splitting remained.
+
+\subsection{G11B score-term decomposition}
+For all 18 $K^\star=8$ cases, the $K=8$ candidate was eligible and inside the near-best tolerance, but the frozen parsimony rule selected a smaller $K$. The table below reports the mean weighted score difference between the selected base proposal and the $K=8$ candidate; positive values favor the selected smaller cardinality.
+
+\begin{table}[H]
+\centering
+\caption{G11B mean weighted score-term differences: selected proposal minus $K=8$.}
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrrrrr}
+\toprule
+Overlap & $K_{\max}$ & Stability & Silhouette & Rare support & Overlap safety & Complexity & Total score\\
+\midrule
+low & 8 & -0.000255 & -0.008255 & 0.006741 & -0.005569 & 0.006667 & -0.000672\\
+low & 12 & -0.000255 & -0.008255 & 0.006741 & -0.005569 & 0.004444 & -0.002894\\
+low & 20 & 0.000287 & -0.005525 & 0.003932 & -0.003593 & 0.001667 & -0.003232\\
+medium & 8 & -0.000842 & -0.002759 & -0.004784 & -0.000116 & 0.012500 & 0.003998\\
+medium & 12 & -0.000842 & -0.002759 & -0.004784 & -0.000116 & 0.008333 & -0.000168\\
+medium & 20 & -0.000842 & -0.002759 & -0.004784 & -0.000116 & 0.005000 & -0.003502\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+The decomposition shows why the failure should not be attributed to one diagnostic in isolation. In low-overlap settings the $K=8$ candidate often had the slightly better total score, yet the difference remained inside the 0.008 near-best window and the parsimony rule therefore chose the smaller candidate. In medium-overlap settings, the explicit complexity term could additionally favor a smaller cardinality, especially at smaller $K_{\max}$. No post-hoc retuning was performed.

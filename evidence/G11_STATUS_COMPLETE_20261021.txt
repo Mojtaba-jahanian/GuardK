@@ -1,0 +1,111 @@
+>>> CHATGPT_STATUS_START : G11 <<<
+======================================================================
+STATUS=COMPLETE
+LOG_BYTES=31309
+COMPLETED_CASES=63
+LAST_CASE=G11_CASE 63/63
+--- LAST 100 LOG LINES ---
+G11_RESULT {"phase": "krange", "method": "guardk_v04", "true_k": 8, "n": 2000, "overlap": "medium", "k_max": 20, "seed": 31001, "exec_status": "PASS", "decision": "ACCEPT", "proposal_k": 3, "selected_k": 3, "runtime_sec": 14.270782660000009, "peak_rss_mb": 188.48828125}
+G11_CASE 62/63
+G11_RUN ('krange', 'guardk_v04', 8, 2000, 'medium', 20, 32003)
+G11_RESULT {"phase": "krange", "method": "guardk_v04", "true_k": 8, "n": 2000, "overlap": "medium", "k_max": 20, "seed": 32003, "exec_status": "PASS", "decision": "ABSTAIN_K_SELECTION_INSTABILITY", "proposal_k": 3, "selected_k": NaN, "runtime_sec": 14.137466095999912, "peak_rss_mb": 188.76171875}
+G11_CASE 63/63
+G11_RUN ('krange', 'guardk_v04', 8, 2000, 'medium', 20, 33007)
+G11_RESULT {"phase": "krange", "method": "guardk_v04", "true_k": 8, "n": 2000, "overlap": "medium", "k_max": 20, "seed": 33007, "exec_status": "PASS", "decision": "ABSTAIN_SCORE_AMBIGUITY", "proposal_k": 3, "selected_k": NaN, "runtime_sec": 14.05533510500004, "peak_rss_mb": 188.58984375}
+
+G11_SCALABILITY_AGGREGATE
+           method     n  runs  coverage  exact_k_rate_all  exact_k_rate_accepted  mean_ARI_accepted  mean_NMI_accepted  mean_runtime_sec  median_runtime_sec  mean_peak_rss_mb  max_peak_rss_mb
+       guardk_v02  2000     3       1.0               1.0                    1.0           0.891672           0.837975          1.659683            1.601553        187.170573       187.382812
+       guardk_v02 10000     3       1.0               1.0                    1.0           0.891572           0.837143          1.947857            1.952466        206.070312       206.285156
+       guardk_v02 50000     3       1.0               1.0                    1.0           0.889842           0.834300          9.836595            9.835775        214.958333       215.355469
+       guardk_v04  2000     3       1.0               1.0                    1.0           0.891672           0.837975          8.883318            9.065834        187.934896       188.003906
+       guardk_v04 10000     3       1.0               1.0                    1.0           0.891572           0.837143         11.151870           11.152022        208.695312       209.066406
+       guardk_v04 50000     3       1.0               1.0                    1.0           0.889842           0.834300         50.015432           50.156725        222.040365       222.199219
+kmeans_silhouette  2000     3       1.0               1.0                    1.0           0.890991           0.837088          1.640656            1.643739        164.710938       164.878906
+kmeans_silhouette 10000     3       1.0               1.0                    1.0           0.891631           0.837170          2.246389            2.243534        166.507812       166.714844
+kmeans_silhouette 50000     3       1.0               1.0                    1.0           0.889777           0.834204         14.593328           14.640529        173.108073       173.156250
+
+G11_KRANGE_AGGREGATE
+ true_k overlap  k_max  runs  coverage  exact_k_rate_all  exact_k_rate_accepted  mean_abs_k_error_accepted  mean_ARI_accepted  mean_NMI_accepted  mean_runtime_sec  mean_peak_rss_mb
+      4     low      8     3  1.000000               1.0                    1.0                        0.0           0.986816           0.972356          5.242394        187.576823
+      4     low     12     3  1.000000               1.0                    1.0                        0.0           0.986816           0.972356          8.286389        187.927083
+      4     low     20     3  1.000000               1.0                    1.0                        0.0           0.986816           0.972356         14.029138        188.707031
+      4  medium      8     3  1.000000               1.0                    1.0                        0.0           0.891672           0.837975          5.403247        187.714844
+      4  medium     12     3  1.000000               1.0                    1.0                        0.0           0.891672           0.837975          8.482442        187.834635
+      4  medium     20     3  1.000000               1.0                    1.0                        0.0           0.891672           0.837975         14.329511        188.605469
+      8     low      8     3  0.666667               0.0                    0.0                        3.0           0.719965           0.833511          5.091160        187.626302
+      8     low     12     3  0.333333               0.0                    0.0                        2.0           0.803714           0.888156          8.017292        188.252604
+      8     low     20     3  0.333333               0.0                    0.0                        2.0           0.803714           0.888156         13.789424        188.790365
+      8  medium      8     3  0.333333               0.0                    0.0                        5.0           0.450792           0.559548          5.338896        187.588542
+      8  medium     12     3  0.666667               0.0                    0.0                        5.0           0.455641           0.574255          8.434298        188.037760
+      8  medium     20     3  0.333333               0.0                    0.0                        5.0           0.452447           0.573893         14.154528        188.613281
+
+G11_KRANGE_PAIRED_SUMMARY
+{
+  "n_paired_datasets": 12,
+  "proposal_agreement_rate": 0.9166666666666666,
+  "decision_agreement_rate": 0.5833333333333334,
+  "reported_agreement_rate": 0.6666666666666666
+}
+G11_EXECUTION_FAILURES=0
+G11_LABEL_ISOLATION_DESIGN_PASS
+G11_NO_POSTHOC_TUNING_PASS
+G11_COMPLETED_PASS
+src/guardk/core.py: OK
+src/guardk/core_v04.py: OK
+src/guardk/metrics.py: OK
+G11_CORE_SOURCE_IMMUTABILITY_PASS
+======================================================================
+>>> CHATGPT_COPY_START : G11 <<<
+======================================================================
+G11_PROTOCOL_LOCK_PRE_RUN_PASS
+G11_RUNNER_PYCOMPILE_PASS
+G11_COMPLETED_PASS
+G11_CORE_SOURCE_IMMUTABILITY_PASS
+G11_ARTIFACT=/home/ubuntu/GuardK_V6/artifacts/G11_Q1_SCALABILITY_KRANGE_20261021_061257.tar.gz
+G11_ARTIFACT_SHA256=29755f73e84f3b79ce7f85c48abb6207a4e64df97115e1499be306f122881354
+--- SCALABILITY ---
+method,n,runs,coverage,exact_k_rate_all,exact_k_rate_accepted,mean_ARI_accepted,mean_NMI_accepted,mean_runtime_sec,median_runtime_sec,mean_peak_rss_mb,max_peak_rss_mb
+guardk_v02,2000,3,1.0,1.0,1.0,0.8916723526327403,0.8379748316295953,1.6596833753333395,1.6015526049999949,187.17057291666666,187.3828125
+guardk_v02,10000,3,1.0,1.0,1.0,0.8915718758499432,0.8371427160068413,1.9478569150000073,1.9524656120000259,206.0703125,206.28515625
+guardk_v02,50000,3,1.0,1.0,1.0,0.8898417314514978,0.8343001041169066,9.836595194000003,9.835774799000035,214.95833333333334,215.35546875
+guardk_v04,2000,3,1.0,1.0,1.0,0.8916723526327403,0.8379748316295953,8.883317917999998,9.065833796999996,187.93489583333334,188.00390625
+guardk_v04,10000,3,1.0,1.0,1.0,0.8915718758499432,0.8371427160068413,11.151869631999995,11.15202229899998,208.6953125,209.06640625
+guardk_v04,50000,3,1.0,1.0,1.0,0.8898417314514978,0.8343001041169066,50.015431811333336,50.156725193,222.04036458333334,222.19921875
+kmeans_silhouette,2000,3,1.0,1.0,1.0,0.8909907775866208,0.8370878772071778,1.6406557946666613,1.6437394350000005,164.7109375,164.87890625
+kmeans_silhouette,10000,3,1.0,1.0,1.0,0.891630562411789,0.8371696883731641,2.2463892230000035,2.243534154999992,166.5078125,166.71484375
+kmeans_silhouette,50000,3,1.0,1.0,1.0,0.8897769225940187,0.8342042738025034,14.593328165000012,14.640528713999998,173.10807291666666,173.15625
+--- EMPIRICAL SLOPES ---
+method,empirical_runtime_loglog_slope,empirical_memory_loglog_slope
+guardk_v02,0.5528274107823853,0.043003788496077805
+guardk_v04,0.5368819927915497,0.05180802018140484
+kmeans_silhouette,0.6789539365516382,0.015447646165894193
+--- K-RANGE ---
+true_k,overlap,k_max,runs,coverage,exact_k_rate_all,exact_k_rate_accepted,mean_abs_k_error_accepted,mean_ARI_accepted,mean_NMI_accepted,mean_runtime_sec,mean_peak_rss_mb
+4,low,8,3,1.0,1.0,1.0,0.0,0.9868156403865381,0.972355658986814,5.242393874666675,187.57682291666666
+4,low,12,3,1.0,1.0,1.0,0.0,0.9868156403865381,0.972355658986814,8.28638898633333,187.92708333333334
+4,low,20,3,1.0,1.0,1.0,0.0,0.9868156403865381,0.972355658986814,14.029137507666652,188.70703125
+4,medium,8,3,1.0,1.0,1.0,0.0,0.8916723526327403,0.8379748316295953,5.403247138333332,187.71484375
+4,medium,12,3,1.0,1.0,1.0,0.0,0.8916723526327403,0.8379748316295953,8.482441680999955,187.83463541666666
+4,medium,20,3,1.0,1.0,1.0,0.0,0.8916723526327403,0.8379748316295953,14.329511024999988,188.60546875
+8,low,8,3,0.6666666666666666,0.0,0.0,3.0,0.7199654803423556,0.8335107600357526,5.091160180666634,187.62630208333334
+8,low,12,3,0.3333333333333333,0.0,0.0,2.0,0.8037137589280225,0.8881561585027719,8.017291550666718,188.25260416666666
+8,low,20,3,0.3333333333333333,0.0,0.0,2.0,0.8037137589280225,0.8881561585027719,13.789423772000001,188.79036458333334
+8,medium,8,3,0.3333333333333333,0.0,0.0,5.0,0.45079151104327686,0.5595480148939119,5.338896293333353,187.58854166666666
+8,medium,12,3,0.6666666666666666,0.0,0.0,5.0,0.4556410406156479,0.5742547315979303,8.434297693000039,188.03776041666666
+8,medium,20,3,0.3333333333333333,0.0,0.0,5.0,0.4524474653887734,0.5738926047616679,14.154527953666653,188.61328125
+--- K-RANGE PAIRED SUMMARY ---
+{
+  "n_paired_datasets": 12,
+  "proposal_agreement_rate": 0.9166666666666666,
+  "decision_agreement_rate": 0.5833333333333334,
+  "reported_agreement_rate": 0.6666666666666666
+}--- EXECUTION FAILURES ---
+phase,method,true_k,n,d,imbalance_ratio,overlap,noise_fraction,k_min,k_max,seed,exec_status,decision,proposal_k,selected_k,coverage,runtime_sec,peak_rss_mb,selection_consistency,selection_mode,selection_mode_support,score_margin,overlap_safety,exact_k,abs_k_error,ARI,NMI,worst_cluster_recall
+======================================================================
+>>> CHATGPT_COPY_END : G11 <<<
+======================================================================
+======================================================================
+>>> CHATGPT_STATUS_END : G11 <<<
+======================================================================
+PS C:\Users\ValiAsr>
